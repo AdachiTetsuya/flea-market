@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="{% static 'myapp/css/base.css' %}">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+        {% block extra_style %}{% endblock %}
+        <title>フリーマーケット</title>
+    </head>
+    <body>
+        {% block header %}
+        <header class="header" id="header">
+            <div class="header-container">
+                <a href="">
+                    <div class="site-icon">
+                        <i class="bi bi-house"></i>
+                    </div>
+                </a>
+                <form action="" class="search-form">
+                    <input type="text" name="" class="search-input">
+                    <button><i class="bi bi-search"></i></button>
+                </form>
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="#">
+                                <i class="bi bi-bell-fill"></i>
+                                お知らせ
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="bi bi-person-circle"></i>
+                                アカウント
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <button class="sell-btn">出品</button>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        {% endblock %}
+
+        {% block content %}{% endblock %}
+        
+    </body>
+</html>
