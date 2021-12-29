@@ -26,9 +26,11 @@ ul{
 
 /* header */
 .header{
+    position: fixed;
     width: 100vw;
     height: 56px;
     border-bottom: solid 1px #9b9b9b;
+    z-index: 1;
 }
 .header-container{
     display: flex;
@@ -68,6 +70,11 @@ header ul li a i{
 .sell-btn{
     font-size: 20px;
 
+}
+
+/* content */
+.content{
+    padding-top: 56px;
 }
 
 
