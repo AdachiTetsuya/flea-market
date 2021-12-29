@@ -1,0 +1,19 @@
+.index-buttons {
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.index-button {
+    display: block;
+    width: 30%;
+    text-align: center;
+    margin: 1rem auto;
+    padding: 2% 0%;
+    border-radius: 10px;
+    border: solid 1px #9b9b9b;
+    font-size: 1rem;
+    color: #000;
+}
