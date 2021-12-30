@@ -9,7 +9,7 @@ class CustomUser(AbstractUser):
         verbose_name_plural = 'CustomUser'
 
     icon = models.FileField(
-        verbose_name="アイコン画像", upload_to="uploads/icon", 
+        verbose_name="アイコン画像", upload_to="uploads/icon", default='default/people-24px.svg'
     )
 
     sell_num = models.IntegerField(

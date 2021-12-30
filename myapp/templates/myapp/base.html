@@ -13,13 +13,14 @@
         {% block header %}
         <header class="header" id="header">
             <div class="header-container">
-                <a href="">
+                <a href="{% url 'myapp:home' %}">
                     <div class="site-icon">
                         <i class="bi bi-house"></i>
                     </div>
                 </a>
-                <form action="" class="search-form">
-                    <input type="text" name="" class="search-input">
+                <form action="{% url 'myapp:search' %}" method="GET" class="search-form">
+                    {% csrf_token %}
+                    <input type="text" name="item_search" class="search-input" value="{{ request.GET.item_search }}">
                     <button><i class="bi bi-search"></i></button>
                 </form>
                 <nav>
@@ -32,8 +33,10 @@
                         </li>
                         <li>
                             <a href="#">
-                                <i class="bi bi-person-circle"></i>
+                                <img class="user_icon" src="{{ user.socialaccount_set.all.0.get_avatar_url }}" alt="アイコン画像">
                                 アカウント
+                                <!-- <img class="user_icon" src="{{ user.icon.url }}" alt="アイコン画像">
+                                アカウント -->
                             </a>
                         </li>
                         <li>
@@ -48,9 +51,6 @@
         {% endblock %}
 
         {% block content %}
-        <div class="content">
-
-        </div>
         {% endblock %}
         
     </body>

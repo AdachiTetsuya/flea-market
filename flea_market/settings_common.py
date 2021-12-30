@@ -33,11 +33,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    
     'django_cleanup.apps.CleanupConfig',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    ''
+    'allauth.socialaccount.providers.line', 
 
     'accounts.apps.AccountsConfig',
     'myapp.apps.MyappConfig',
@@ -129,25 +130,32 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static")
+]
+
 MEDIA_URL = '/media/'
 
 
-SITE_ID = 1
+SITE_ID = 2
 
 AUTHENTICATION_BACKENDS = (
-    'allauth.account.auth_backends.AuthenticationBackend',
+    #管理サイト用(ユーザー名認証)
     'django.contrib.auth.backends.ModelBackend',
+    #一般ユーザー用(メールアドレス認証)
+    'allauth.account.auth_backends.AuthenticationBackend',
 )
+
 
 #メールアドレス認証に変更する設定
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_USERNAME_REQUIRED = True
 
-#メールアドレスは複数登録するための設定
+#メールアドレスを複数登録するための設定
 ACCOUNT_MAX_EMAIL_ADDRESSES = 2
 
-#サインアップにメールアドレス確認をはさむよう設定
-ACCOUNT_EMAIL_VERIFICATION ='mandatory'
+#サインアップにメールアドレス確認をはさまないよう設定
+ACCOUNT_EMAIL_VERIFICATION ='none'
 ACCOUNT_EMAIL_REQUIRED = True
 
 #ログイン/ログアウト後の遷移先を設定
@@ -156,7 +164,14 @@ ACCOUNT_LOGOUT_REDIRECT_URL = 'myapp:index'
 
 #ログアウトリンクのクリック一発でログアウトする設定
 ACCOUNT_LOGOUT_ON_GET = True
-
+#django-allauthが送信するメールの件名に自動付与される接頭辞をブランクにする設定
 ACCOUNT_EMAIL_SUBJECT_PREFIX = ''
-
+#デフォルトのメール送信元を設定
 DEFAULT_FROM_EMAIL = 'admin@example.com'
+
+#Lineログインをするにはscopeの設定が重要らしい
+SOCIALACCOUNT_PROVIDERS = {
+    'line': {
+        'SCOPE': ['profile','openid'],
+    }
+}

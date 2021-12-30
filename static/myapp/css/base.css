@@ -30,6 +30,7 @@ ul{
     width: 100vw;
     height: 56px;
     border-bottom: solid 1px #9b9b9b;
+    background-color: #eee;
     z-index: 1;
 }
 .header-container{
@@ -61,10 +62,11 @@ header ul li a{
     display: flex;
     flex-direction: column;
     text-align: center;
+    align-items: center;
 }
 
 header ul li a i{
-    font-size: 24px;
+    font-size: 28px;
 }
 
 .sell-btn{
@@ -72,9 +74,16 @@ header ul li a i{
 
 }
 
-/* content */
-.content{
-    padding-top: 56px;
+/* ユーザーアイコンの表示 */
+.user_icon {
+    /* 縦横の長さを合わせる */
+    height: 2rem;
+    width: 2rem;
+    border: solid 1px #000;
+    border-radius: 50%;
+    float: left;
+    /* ここは調べた方が早い、便利要素object-fit */
+    object-fit: cover;
 }
 
 

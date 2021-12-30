@@ -1,0 +1,19 @@
+/* headerを避ける */
+.item{
+    padding-top: 56px;
+    outline: 1px solid blue;
+}
+
+.seller_icon{
+    height: 2rem;
+    width: 2rem;
+    border: solid 1px #000;
+    border-radius: 50%;
+    float: left;
+    /* ここは調べた方が早い、便利要素object-fit */
+    object-fit: cover;
+}
+
+.seller_link{
+    display: block;
+}

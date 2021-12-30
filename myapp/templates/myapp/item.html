@@ -1,0 +1,35 @@
+{% extends "myapp/base.html" %}
+
+{% load static %}
+
+{% block extra_style %}
+<link rel="stylesheet" href="{% static 'myapp/css/item.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="item">
+    <img class="item_image" src="{{ item.image.url }}" alt="商品の写真">
+    <div>{{ item.name }}</div>
+    <div>{{ item.price }}円</div>
+    <button>購入手続きへ</button>
+    <div>商品の説明</div>
+    <div>{{ item.detail }}</div>
+    <div>商品の情報</div>
+    <ul>
+        <li>
+            カテゴリー
+            {{ item.category }}
+        </li>
+        <li>
+            商品の状態
+            {{ item.quality }}
+        </li>
+    </ul>
+    出品者
+    <a class="seller_link" href="#">
+        <img class="seller_icon" src="{{ item.seller.icon.url }}" alt="出品者のアイコン画像">
+        {{ item.seller.username }}
+    </a>
+</div>
+{% endblock %}
+

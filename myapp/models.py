@@ -41,6 +41,8 @@ class Item(models.Model):
         verbose_name="商品画像", upload_to="uploads/item", 
     )
 
+    name = models.CharField(max_length=30)
+
     category = models.CharField(
         max_length=10,
         choices=Category.choices,
@@ -55,7 +57,7 @@ class Item(models.Model):
         validators=[MinValueValidator(0), MaxValueValidator(999999)]
     )
 
-    detail = models.TextField
+    detail = models.TextField(max_length=5000)
 
     sell_time = models.DateTimeField(auto_now_add=True)
 
@@ -66,6 +68,8 @@ class Item(models.Model):
     is_settle = models.BooleanField(default=False)
 
     is_given = models.BooleanField(default=False)
+
+    is_got = models.BooleanField(default=False)
 
     class Meta:
         verbose_name_plural = 'Item'

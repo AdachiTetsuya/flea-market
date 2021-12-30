@@ -1,0 +1,23 @@
+/* headerを避ける */
+.search{
+    padding-top: 56px;
+    outline: 1px solid blue;
+}
+
+.search ul{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+/* 商品の写真の表示 */
+.item-list__image{
+    /* 縦横の長さを合わせる */
+    height: 12rem;
+    width: 12rem;
+    outline: 1px solid blue;
+}
+
+.item-list__link{
+    display: block;
+}

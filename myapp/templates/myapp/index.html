@@ -9,8 +9,9 @@
 
 {% block content %}
 <div class="index-buttons">
-    <a  href="{% url 'account_login' %}" class="index-button">ログイン</a>
-    <a  href="{% url 'account_signup' %}" class="index-button">会員登録</a>
-    <a  href="{% url 'account_logout' %}" class="index-button">ログアウト</a>
+    <a href="{% url 'account_login' %}" class="index-button">ログイン</a>
+    <a href="{% url 'account_signup' %}" class="index-button">会員登録</a>
+    <a href="{% url 'line_login' %}" class="index-button">lineでログイン</a>
+    <a href="{% url 'account_logout' %}" class="index-button">ログアウト</a>
 </div>
 {% endblock %}
