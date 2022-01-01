@@ -1,0 +1,36 @@
+{% extends "myapp/base.html" %}
+
+{% load static %}
+
+{% block extra_style %}
+<link rel="stylesheet" href="{% static 'myapp/css/settings.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="settings">
+    名前:{{user.username }}
+    <img class="user_icon" src="{{ user.icon.url }}" alt="アイコン画像">
+    出品数:{{ user.sell_num }}
+    購入数:{{ user.buy_num }}
+    <div class="introduction">
+        <p>自己紹介</p>
+        {{ user.introduction }}
+    </div>
+
+    <div class="settings_item">
+        <ul>
+            <a href="{% url 'myapp:change_profile' %}">
+                <li>プロフィール変更</li>
+            </a>
+            <a href="{% url 'account_email' %}">
+                <li>メールアドレス変更</li>
+            </a>
+            <a href="{% url 'account_reset_password' %}">
+                <li>パスワード変更</li>
+            </a>
+        </ul>
+
+    </div>
+
+</div>
+{% endblock %}

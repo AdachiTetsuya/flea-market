@@ -1,0 +1,39 @@
+{% extends "myapp/base.html" %}
+{% load static %}
+
+{% block extra_style %}
+<link rel="stylesheet" href="{% static 'accounts/css/account.css' %}">
+{% endblock %}
+
+{% block header %}
+<header class="header" id="header">
+    <div class="header-container">
+        <a href="{% url 'myapp:home' %}">
+            <div class="site-icon">
+                <i class="bi bi-house"></i>
+            </div>
+        </a>
+    </div>
+</header>
+{% endblock %}
+
+{% block content %}
+<div class="account">
+
+    {% if confirmation %}
+    <p>ユーザー登録を確定するには、以下のボタンを押してください。</p>
+
+    <form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
+        {% csrf_token %}
+
+        <button type="submit" class="submit-btn">確定</button>
+    </form>
+        {% else %}
+
+            {% url 'account_email' as email_url %}
+
+            <p>リンクの有効期限が過ぎています。<a herf="{{ email_url }}">再申請</a>.</p>
+
+        {% endif %}
+</div>
+{% endblock %}

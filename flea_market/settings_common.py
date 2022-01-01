@@ -157,9 +157,11 @@ ACCOUNT_USERNAME_REQUIRED = False
 #メールアドレスを複数登録するための設定
 ACCOUNT_MAX_EMAIL_ADDRESSES = 2
 
-#サインアップにメールアドレス確認をはさまないよう設定
-ACCOUNT_EMAIL_VERIFICATION ='none'
+#サインアップにメールアドレス確認をはさむよう設定
+ACCOUNT_EMAIL_VERIFICATION ='mandatory'
 ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1 # 確認メールの有効期限（日）
+
 
 #ログイン/ログアウト後の遷移先を設定
 LOGIN_REDIRECT_URL= 'myapp:home'
@@ -171,6 +173,15 @@ ACCOUNT_LOGOUT_ON_GET = True
 ACCOUNT_EMAIL_SUBJECT_PREFIX = ''
 #デフォルトのメール送信元を設定
 DEFAULT_FROM_EMAIL = 'admin@example.com'
+
+# ソーシャルアカウントでログイン・サインアップ時の設定
+SOCIALACCOUNT_EMAIL_VERIFICATION = 'mandatory' 
+SOCIALACCOUNT_USERNAME_REQUIRED = False
+SOCIALACCOUNT_AUTO_SIGNUP = False
+
+SOCIALACCOUNT_FORMS = {
+    'signup': 'accounts.forms.SocialPasswordedSignupForm'
+}
 
 #Lineログインをするにはscopeの設定が重要らしい
 SOCIALACCOUNT_PROVIDERS = {

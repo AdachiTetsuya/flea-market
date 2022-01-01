@@ -11,6 +11,8 @@ urlpatterns = [
 
     path("item/<int:item_id>/", views.ItemView.as_view(), name="item"),
     path("search",views.search, name="search"),
-    path("search/<str:category_label>/",views.search, name="search"),
     path("category",views.category, name="category"),
+
+    path("settings",views.SettingsView.as_view(),name="settings"),
+    path("change_profile",views.change_profile,name="change_profile"),
 ]

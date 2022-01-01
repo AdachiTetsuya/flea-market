@@ -1,0 +1,22 @@
+{% extends "myapp/base.html" %}
+
+{% load static %}
+
+{% block extra_style %}
+<link rel="stylesheet" href="{% static 'myapp/css/settings.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="settings">
+    <form action="{% url 'myapp:change_profile' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit" class="submit-btn">変更</button>
+    </form>
+
+</div>
+{% endblock %}
+
+

@@ -1,0 +1,26 @@
+{% extends "myapp/base.html" %}
+{% load static %}
+
+{% block extra_style %}
+<link rel="stylesheet" href="{% static 'accounts/css/account.css' %}">
+{% endblock %}
+
+{% block header %}
+<header class="header" id="header">
+    <div class="header-container">
+        <a href="{% url 'myapp:home' %}">
+            <div class="site-icon">
+                <i class="bi bi-house"></i>
+            </div>
+        </a>
+    </div>
+</header>
+{% endblock %}
+
+{% block content %}
+<div class="account">
+    <h1>メールアドレスを確認してください</h1>
+        確認のメールを送信しました。<br>メールに記載されたリンクをクリックして、ユーザー登録を完了させてください。<br>数分待っても確認のメールが届かない場合はご連絡ください。
+    
+</div>
+{% endblock %}

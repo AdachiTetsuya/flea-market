@@ -6,6 +6,7 @@ from django .views.generic import View
 
 from . utils import ObjectWithFileField,get_avatar_url
 from . models import Item,Category
+from .forms import UserForm
 
 
 User = get_user_model()
@@ -36,18 +37,7 @@ def home(request):
 
 
 
-def search(request,category_label):
-    if request.method == 'GET':
-        user = request.user
-        items = (
-            Item.objects.filter(category=category_label)
-            .order_by("sell_time").reverse()
-        )
-        context = {
-            "items": items,
-        }
-        return render(request, "myapp/search.html", context)
-
+def search(request):
 
     if request.method == 'POST':
         q_word = request.POST['item_search'].strip()
@@ -85,3 +75,32 @@ class ItemView(LoginRequiredMixin,View):
         }
         return render(request, "myapp/item.html", context)
 
+
+
+
+# アカウント設定画面
+class SettingsView(generic.TemplateView):
+    template_name = 'myapp/settings.html'
+
+
+
+# プロフィール編集画面
+def change_profile(request):
+    obj = request.user
+    if(request.method == 'POST'):
+        form=UserForm(request.POST,request.FILES)
+
+        if form.is_valid():
+            icon = form.cleaned_data['icon']
+            name = form.cleaned_data['username']
+            introduction = form.cleaned_data['introduction']
+
+            obj.icon = icon
+            obj.username = name
+            obj.introduction = introduction
+            obj.save()
+            return redirect(to="/settings")
+    context = {
+        'form':UserForm(instance=obj),
+    }
+    return render(request,'myapp/change_profile.html',context)

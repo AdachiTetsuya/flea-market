@@ -1,0 +1,77 @@
+{% extends "myapp/base.html" %}
+{% load static %}
+
+{% block extra_style %}
+<link rel="stylesheet" href="{% static 'accounts/css/account.css' %}">
+{% endblock %}
+
+{% block header %}
+<header class="header" id="header">
+    <div class="header-container">
+        <a href="{% url 'myapp:home' %}">
+            <div class="site-icon">
+                <i class="bi bi-house"></i>
+            </div>
+        </a>
+    </div>
+</header>
+{% endblock %}
+
+{% block content %}
+<div class="account">
+    <div>
+        <main>
+            <div>
+                {% for emailaddress in user.emailaddress_set.all %}
+                {% if emailaddress.verified %}
+                <p>登録されているメールアドレス</p>
+                <p>{{ emailaddress.email }}</p>
+                {% else %}
+                <p>未登録のメールアドレス</p>
+                <form action="{% url 'account_email' %}" method="post">
+                    {% csrf_token %}
+                    <input type="text" readonly name="email" value="{{emailaddress.email}}"/>
+                    <p>
+                        メールアドレスを変更する場合は、上記メールアドレス宛に送信されたメールをご確認ください。
+                        メールが届いていない場合は、「確認メールを再送する」ボタンをクリックしてください。			
+                    </p>
+                    <button type="submit" name="action_send" >確認メールを再送する</button>
+                    <button type="submit" name="action_remove" >削除</button>
+                </form>
+                {% endif %}
+                {% endfor %}
+            </div>
+            {% if can_add_email %}
+            <form method="post" action="{% url 'account_email' %}" class="add_email">
+                {% csrf_token %}
+                <p>
+                    <label for="id_email">新しいメールアドレス</label>
+                    <input type="email" name="email" placeholder="メールアドレス" required="" id="id_email">
+                </p>
+                <p>メールアドレスを所有していることを確認するためにメールが送信されます。確認が完了するとメールアドレスが更新されます。</p>
+                {% for error in form.errors.email %}
+                <p>{{ error }}</p>
+                {% endfor %}
+                <button name="action_add" type="submit">確認メールを送信</button>
+            </form>
+            {% else %}
+            <p>変更する場合は、未確認となっているメールアドレスを削除してください。</p>
+            {% endif %}
+        </main>
+    </div>
+    
+    <script type="text/javascript">
+        (function() {
+            var message = "選択されたメールアドレスを削除しても良いですか？";
+            var actions = document.getElementsByName('action_remove');
+            if (actions.length) {
+                actions[0].addEventListener("click", function(e) {
+                    if (! confirm(message)) {
+                        e.preventDefault();
+                    }
+                });
+            }
+        })();
+    </script>
+</div>
+{% endblock %}
