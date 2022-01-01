@@ -18,9 +18,9 @@
                         <i class="bi bi-house"></i>
                     </div>
                 </a>
-                <form action="{% url 'myapp:search' %}" method="GET" class="search-form">
+                <form action="{% url 'myapp:search' %}" method="POST" class="search-form">
                     {% csrf_token %}
-                    <input type="text" name="item_search" class="search-input" value="{{ request.GET.item_search }}">
+                    <input type="text" name="item_search" class="search-input" >
                     <button><i class="bi bi-search"></i></button>
                 </form>
                 <nav>
@@ -31,14 +31,30 @@
                                 お知らせ
                             </a>
                         </li>
+                        {% if user.is_authenticated %}
                         <li>
                             <a href="#">
-                                <img class="user_icon" src="{{ user.socialaccount_set.all.0.get_avatar_url }}" alt="アイコン画像">
+                                <img class="user_icon" src="{{ user.icon.url }}" alt="アイコン画像">
                                 アカウント
-                                <!-- <img class="user_icon" src="{{ user.icon.url }}" alt="アイコン画像">
-                                アカウント -->
                             </a>
                         </li>
+                        <li>
+                            <a href="{% url 'account_logout' %}">
+                                ログアウト
+                            </a>
+                        </li>
+                        {% else %}
+                        <li>
+                            <a href="{% url 'myapp:login_list' %}">
+                                ログイン
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'myapp:signup_list' %}">
+                                会員登録
+                            </a>
+                        </li>
+                        {% endif %}
                         <li>
                             <a href="#">
                                 <button class="sell-btn">出品</button>

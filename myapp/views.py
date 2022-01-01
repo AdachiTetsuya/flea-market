@@ -4,8 +4,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 from django .views.generic import View
 
-
-from .models import Item
+from . utils import ObjectWithFileField,get_avatar_url
+from . models import Item,Category
 
 
 User = get_user_model()
@@ -14,26 +14,43 @@ User = get_user_model()
 class IndexView(generic.TemplateView):
     template_name = "myapp/index.html"
 
+# ログイン選択画面
+class LoginListView(generic.TemplateView):
+    template_name = "myapp/login_list.html"
 
-# home画面
-class HomeView(LoginRequiredMixin,generic.ListView):
-    model = Item
-    template_name = "myapp/home.html"
+# 会員登録選択画面
+class SignupListView(generic.TemplateView):
+    template_name = "myapp/signup_list.html"
 
-    def get_queryset(self):
-        user = self.request.user
-
+#ホーム画面
+def home(request):
+    if request.method == 'GET':
         items = (
-            Item.objects.filter(is_purchased=False).exclude(seller=user)
+            Item.objects.filter(is_purchased=False)
             .order_by("sell_time").reverse()
         )
+        context = {
+            "items": items,
+        }
+        return render(request, "myapp/home.html", context)
 
-        return items
 
 
-class SearchView(View):
-    def get(self, request):
-        q_word = request.GET['item_search'].strip()
+def search(request,category_label):
+    if request.method == 'GET':
+        user = request.user
+        items = (
+            Item.objects.filter(category=category_label)
+            .order_by("sell_time").reverse()
+        )
+        context = {
+            "items": items,
+        }
+        return render(request, "myapp/search.html", context)
+
+
+    if request.method == 'POST':
+        q_word = request.POST['item_search'].strip()
         items = (
             Item.objects.filter(name__contains=q_word)
             .order_by("sell_time").reverse()
@@ -42,8 +59,17 @@ class SearchView(View):
         context = {
             "items": items,
         }
-
         return render(request, "myapp/search.html", context)
+
+
+# カテゴリー一覧画面
+def category(request):
+    if request.method == 'GET':
+    
+        context = {
+            "Category": Category,
+        }
+        return render(request, "myapp/category.html", context)
 
 
 #商品詳細の画面
@@ -53,6 +79,9 @@ class ItemView(LoginRequiredMixin,View):
 
         context = {
             "item": item,
+            "category":item.get_category_display(),
+            "quality":item.get_quality_display(),
+
         }
         return render(request, "myapp/item.html", context)
 

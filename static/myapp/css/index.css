@@ -1,3 +1,8 @@
+.account{
+    padding: 56px;
+}
+
+
 .index-buttons {
     display: flex;
     height: 100vh;

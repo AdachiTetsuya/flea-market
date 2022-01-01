@@ -1,0 +1,9 @@
+/* headerを避ける */
+.category{
+    padding-top: 56px;
+    outline: 1px solid blue;
+}
+
+.category-link{
+    display: block;
+}

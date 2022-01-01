@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.line', 
+    'allauth.socialaccount.providers.line',
+    'allauth.socialaccount.providers.twitter',
 
     'accounts.apps.AccountsConfig',
     'myapp.apps.MyappConfig',
@@ -59,7 +60,9 @@ ROOT_URLCONF = 'flea_market.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -149,7 +152,7 @@ AUTHENTICATION_BACKENDS = (
 
 #メールアドレス認証に変更する設定
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_USERNAME_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
 
 #メールアドレスを複数登録するための設定
 ACCOUNT_MAX_EMAIL_ADDRESSES = 2
@@ -160,7 +163,7 @@ ACCOUNT_EMAIL_REQUIRED = True
 
 #ログイン/ログアウト後の遷移先を設定
 LOGIN_REDIRECT_URL= 'myapp:home'
-ACCOUNT_LOGOUT_REDIRECT_URL = 'myapp:index'
+ACCOUNT_LOGOUT_REDIRECT_URL = 'myapp:home'
 
 #ログアウトリンクのクリック一発でログアウトする設定
 ACCOUNT_LOGOUT_ON_GET = True

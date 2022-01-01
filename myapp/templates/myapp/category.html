@@ -1,0 +1,24 @@
+{% extends "myapp/base.html" %}
+
+{% load static %}
+
+{% block extra_style %}
+<link rel="stylesheet" href="{% static 'myapp/css/category.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="category">
+    <ul>
+        {% for category in Category %}
+        <li>
+            <a href="{% url 'myapp:search' category.value %}" class="category-link">
+                {{ category.label }}
+                </form>
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
+
+

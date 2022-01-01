@@ -1,0 +1,30 @@
+{% extends "myapp/base.html" %}
+{% load static %}
+
+{% block extra_style %}
+<link rel="stylesheet" href="{% static 'myapp/css/index.css' %}">
+{% endblock %}
+
+{% block header %}
+<header class="header" id="header">
+    <div class="header-container">
+        <a href="{% url 'myapp:home' %}">
+            <div class="site-icon">
+                <i class="bi bi-house"></i>
+            </div>
+        </a>
+    </div>
+</header>
+{% endblock %}
+
+{% block content %}
+<div class="account">
+ログイン
+    <div class="index-buttons">
+        <a href="{% url 'account_login' %}" class="index-button">メールでログイン</a>
+        <a href="{% url 'line_login' %}" class="index-button">lineでログイン</a>
+        <a href="{% url 'twitter_login' %}" class="index-button">twitterでログイン</a>
+        <a href="{% url 'account_signup' %}" class="index-button">会員登録</a>
+    </div>
+</div>
+{% endblock %}

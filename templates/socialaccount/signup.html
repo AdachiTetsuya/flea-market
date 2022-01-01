@@ -1,0 +1,35 @@
+{% extends "myapp/base.html" %}
+{% load static %}
+
+{% block extra_style %}
+<link rel="stylesheet" href="{% static 'accounts/css/account.css' %}">
+{% endblock %}
+
+{% block header %}
+<header class="header" id="header">
+    <div class="header-container">
+        <a href="{% url 'myapp:home' %}">
+            <div class="site-icon">
+                <i class="bi bi-house"></i>
+            </div>
+        </a>
+    </div>
+</header>
+{% endblock %}
+
+{% block content %}
+<div class="account">
+会員登録
+<form method="post" action="{% url 'socialaccount_signup' %}">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    {% if redirect_field_value %}
+    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}">
+    {% endif %}
+
+    <button type="submit" class="submit-btn">登録</button>
+</form>
+</div>
+{% endblock %}

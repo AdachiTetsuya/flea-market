@@ -44,8 +44,9 @@ class Item(models.Model):
     name = models.CharField(max_length=30)
 
     category = models.CharField(
-        max_length=10,
+        max_length=30,
         choices=Category.choices,
+        
     )
 
     quality = models.CharField(
