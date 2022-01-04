@@ -1,0 +1,44 @@
+
+/* headerを避ける */
+.category{
+    padding-top: 56px;
+    outline: 1px solid blue;
+    text-align: center;
+    width: 100vw;
+
+    .category_title{
+        margin: 1rem 0;
+        padding-top: 0.5rem;
+        font-size: 1.6rem;
+        font-weight: bold;
+    }
+
+    .category_container{
+        margin: 0 auto;
+        width: 40%;
+
+        ul{
+            text-align: left;
+
+            li{
+                border-bottom: 1px solid rgb(189, 189, 189);
+                a{
+                    display: flex;
+                    justify-content: space-between;
+                    p{
+                        margin: 0;
+                        padding: 0.7rem 0;
+                    }
+                }
+                a:hover{
+                    background-color: #eee;
+                }
+            }
+
+            li:first-child {
+                border-top: 1px solid rgb(189, 189, 189);
+            }
+            
+        }
+    }
+}

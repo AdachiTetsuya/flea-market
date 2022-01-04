@@ -21,3 +21,4 @@ class ObjectWithFileField(models.Model):
 def get_avatar_url(a_user):
         if a_user.socialaccount_set.exists():
             return a_user.socialaccount_set.first().get_avatar_url()
+

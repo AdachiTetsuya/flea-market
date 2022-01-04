@@ -1,19 +1,156 @@
-/* headerを避ける */
-.item{
-    padding-top: 56px;
-    outline: 1px solid blue;
+.item {
+  padding-top: 56px;
 }
 
-.seller_icon{
-    height: 2rem;
-    width: 2rem;
-    border: solid 1px #000;
-    border-radius: 50%;
-    float: left;
-    /* ここは調べた方が早い、便利要素object-fit */
-    object-fit: cover;
+.item .item_container {
+  width: 80%;
+  margin: 0 auto;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[4];
+      grid-template-columns: repeat(4, 1fr);
 }
 
-.seller_link{
-    display: block;
+.item .item_container .item_image_wrap {
+  position: fixed;
+  top: 7rem;
+}
+
+.item .item_container .item_image_wrap .item_image {
+  width: 40vw;
+  height: 40vw;
+  -o-object-fit: contain;
+     object-fit: contain;
+  background: #eee;
+}
+
+.item .item_container .item_about {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 0.8rem;
+  margin-top: 3.5rem;
+  -ms-grid-column: 3;
+  -ms-grid-column-span: 2;
+  grid-column: 3 / 5;
+  padding-left: 6rem;
+}
+
+.item .item_container .item_about .item_name {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.item .item_container .item_about .item_price {
+  font-size: 2rem;
+  color: red;
+}
+
+.item .item_container .item_about .item_button {
+  margin-top: 3rem;
+  width: 70%;
+  height: 3rem;
+  background-color: #ff4747;
+  font-weight: bold;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  border-radius: 5px;
+}
+
+.item .item_container .item_about .item_detail {
+  padding-top: 1.5rem;
+}
+
+.item .item_container .item_about .item_detail .item_detail_title {
+  margin: 0 0 1rem;
+  font-weight: bold;
+  font-size: 1.4rem;
+  color: #5f5f5f;
+}
+
+.item .item_container .item_about .item_info {
+  width: 80%;
+}
+
+.item .item_container .item_about .item_info .item_info_title {
+  margin: 1.5rem 0 0.8rem;
+  font-weight: bold;
+  font-size: 1.4rem;
+  color: #5f5f5f;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.5rem;
+}
+
+.item .item_container .item_about .item_info ul {
+  padding-bottom: 0.5rem;
+}
+
+.item .item_container .item_about .item_info ul li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding-bottom: 0.8rem;
+  gap: 1.5rem;
+}
+
+.item .item_container .item_about .item_info ul li span {
+  font-weight: bold;
+  color: black;
+}
+
+.item .item_container .item_about .item_seller {
+  width: 80%;
+}
+
+.item .item_container .item_about .item_seller .item_seller_title {
+  font-weight: bold;
+  font-size: 1.4rem;
+  color: #5f5f5f;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.5rem;
+}
+
+.item .item_container .item_about .item_seller .seller_info_board {
+  padding-top: 0.5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 0.8rem;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.5rem;
+  -webkit-transition: background-color 0.2s;
+  transition: background-color 0.2s;
+}
+
+.item .item_container .item_about .item_seller .seller_info_board .seller_icon {
+  height: 2.2rem;
+  width: 2.2rem;
+  border: solid 1px #000;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.item .item_container .item_about .item_seller .seller_info_board .seller_name {
+  font-size: 1.5rem;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+  -webkit-box-flex: 2;
+      -ms-flex-positive: 2;
+          flex-grow: 2;
+}
+
+.item .item_container .item_about .item_seller .seller_info_board .next_icon {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
+.item .item_container .item_about .item_seller .seller_info_board:hover {
+  background-color: #eee;
 }

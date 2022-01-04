@@ -1,0 +1,53 @@
+.account{
+    padding-top: 56px;
+
+    .title{
+        padding: 2rem 0 1rem;
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: bold;
+
+    }
+
+    .login_buttons{
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        margin: 0 auto;
+        text-align: center;
+        gap: 1rem;
+
+        a{
+            display: block;
+
+            .login_button_wrap{
+                
+                border-radius: 5px;
+
+                .login_button_icon{
+                    
+                }
+
+                .login_button_text{
+                    text-align: center;
+                }
+            }
+
+            .login_button_wrap#mail{
+                background-color: rgb(255, 71, 71);
+            }
+            .login_button_wrap#line{
+                background-color: rgb(71, 255, 86);
+            }
+            .login_button_wrap#twitter{
+                background-color: rgb(71, 218, 255);
+            }
+        }
+
+    }
+
+    
+    
+}
+
+

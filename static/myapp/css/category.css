@@ -1,9 +1,50 @@
+@charset "UTF-8";
 /* headerを避ける */
-.category{
-    padding-top: 56px;
-    outline: 1px solid blue;
+.category {
+  padding-top: 56px;
+  outline: 1px solid blue;
+  text-align: center;
+  width: 100vw;
 }
 
-.category-link{
-    display: block;
+.category .category_title {
+  margin: 1rem 0;
+  padding-top: 0.5rem;
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+.category .category_container {
+  margin: 0 auto;
+  width: 40%;
+}
+
+.category .category_container ul {
+  text-align: left;
+}
+
+.category .category_container ul li {
+  border-bottom: 1px solid #bdbdbd;
+}
+
+.category .category_container ul li a {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.category .category_container ul li a p {
+  margin: 0;
+  padding: 0.7rem 0;
+}
+
+.category .category_container ul li a:hover {
+  background-color: #eee;
+}
+
+.category .category_container ul li:first-child {
+  border-top: 1px solid #bdbdbd;
 }

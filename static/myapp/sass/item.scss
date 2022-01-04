@@ -1,0 +1,137 @@
+.item{
+    padding-top: 56px;
+
+    .item_container{
+        width: 80%;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+
+        .item_image_wrap{
+            position: fixed;
+            top: 7rem;
+
+            .item_image{
+                
+                width:40vw;
+                height: 40vw;
+                object-fit: contain;
+                background: #eee;
+                    
+            }
+        }
+
+        //商品について
+        .item_about{
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-top: 3.5rem;
+            grid-column: 3 / 5;
+            padding-left: 6rem;
+
+            .item_name{
+                font-size: 2.5rem;
+                font-weight: bold;
+            }
+
+            .item_price{
+                font-size: 2rem;
+                color: red;
+            }
+
+            .item_button{
+                margin-top: 3rem;
+                width: 70%;
+                height: 3rem;
+                background-color: rgb(255, 71, 71);
+                font-weight: bold;
+                border: none;
+                color: white;
+                font-size: 1rem;
+                border-radius: 5px;
+            }
+
+            .item_detail{
+                padding-top: 1.5rem;
+
+                .item_detail_title{
+                    margin: 0 0 1rem;
+                    
+                    font-weight: bold;
+                    font-size: 1.4rem;
+                    color: rgb(95, 95, 95);
+                }
+
+            }
+
+            .item_info{
+                width: 80%;
+                .item_info_title{
+                    margin: 1.5rem 0 0.8rem;
+                    font-weight: bold;
+                    font-size: 1.4rem;
+                    color: rgb(95, 95, 95);
+                    border-bottom: 1px solid#eee;
+                    padding-bottom: 0.5rem;
+                }
+
+                ul {
+                    padding-bottom: 0.5rem;
+                    li{
+                        display: flex;
+                        padding-bottom: 0.8rem;
+                        gap: 1.5rem;
+
+                        span{
+                            font-weight: bold;
+                            color: black;
+                        }
+                    }
+                }
+            }
+
+            .item_seller{
+                width: 80%;
+                .item_seller_title{
+                    font-weight: bold;
+                    font-size: 1.4rem;
+                    color: rgb(95, 95, 95);
+                    border-bottom: 1px solid#eee;
+                    padding-bottom: 0.5rem;
+                }
+
+                .seller_info_board{
+                    padding-top: 0.5rem;
+                    display: flex;
+                    gap: 0.8rem;
+                    border-bottom: 1px solid#eee;
+                    padding-bottom: 0.5rem;
+                    transition: background-color 0.2s;
+
+                    .seller_icon{
+                        height: 2.2rem;
+                        width: 2.2rem;
+                        border: solid 1px #000;
+                        border-radius: 50%;
+                        object-fit: cover;
+                    }
+                    .seller_name{
+                        font-size: 1.5rem;
+                        align-self: flex-start;
+                        flex-grow: 2;
+                        
+                    }
+                    .next_icon{
+                        align-self: center;
+                    }
+                }
+                
+                .seller_info_board:hover{
+                    background-color: #eee;
+                }
+            }
+        }
+
+    }
+}

@@ -13,6 +13,8 @@ urlpatterns = [
     path("search",views.search, name="search"),
     path("category",views.category, name="category"),
 
+    path("sell",views.sell, name="sell"),
+
     path("settings",views.SettingsView.as_view(),name="settings"),
     path("change_profile",views.change_profile,name="change_profile"),
 ]

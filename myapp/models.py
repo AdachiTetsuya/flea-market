@@ -30,7 +30,7 @@ class Quality(models.TextChoices):
 class Item(models.Model):
     
     seller = models.ForeignKey(
-        CustomUser, on_delete=models.CASCADE, related_name="seller"
+        CustomUser, on_delete=models.CASCADE, related_name="seller",blank=True
     )
 
     buyer = models.ForeignKey(
@@ -64,13 +64,15 @@ class Item(models.Model):
 
     give_time = models.DateTimeField(blank=True,null=True)
 
-    is_purchased = models.BooleanField(default=False)
+    is_purchased = models.BooleanField(default=False,blank=True)
 
-    is_settle = models.BooleanField(default=False)
+    is_settle = models.BooleanField(default=False,blank=True)
 
-    is_given = models.BooleanField(default=False)
+    is_given = models.BooleanField(default=False,blank=True)
 
-    is_got = models.BooleanField(default=False)
+    is_got = models.BooleanField(default=False,blank=True)
+
+
 
     class Meta:
         verbose_name_plural = 'Item'

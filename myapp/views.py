@@ -1,12 +1,14 @@
 from django.contrib.auth import get_user_model
+from django.http import request
 from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponse
 from django.views import generic
 from django .views.generic import View
 
-from . utils import ObjectWithFileField,get_avatar_url
 from . models import Item,Category
-from .forms import UserForm
+from .forms import UserForm,SellForm
+
 
 
 User = get_user_model()
@@ -36,9 +38,8 @@ def home(request):
         return render(request, "myapp/home.html", context)
 
 
-
+#検索画面
 def search(request):
-
     if request.method == 'POST':
         q_word = request.POST['item_search'].strip()
         items = (
@@ -67,15 +68,50 @@ class ItemView(LoginRequiredMixin,View):
     def get(self, request, item_id):
         item = get_object_or_404(Item, id=item_id)
 
+
         context = {
             "item": item,
             "category":item.get_category_display(),
             "quality":item.get_quality_display(),
-
         }
         return render(request, "myapp/item.html", context)
 
 
+#出品画面
+def sell(request):
+    form = SellForm()
+    context={
+        "form":form
+    }
+    
+    if(request.method == 'POST'):
+        user = request.user
+        new_item = Item()
+        form = SellForm(request.POST, request.FILES)
+        context={
+            "form":form
+        }
+        if form.is_valid():
+            image = form.cleaned_data['image']
+            name = form.cleaned_data['name']
+            category = form.cleaned_data['category']
+            quality = form.cleaned_data['quality']
+            price = form.cleaned_data['price']
+            detail = form.cleaned_data['detail']
+
+            new_item.seller = user
+            new_item.image = image
+            new_item.name = name
+            new_item.category = category
+            new_item.quality = quality
+            new_item.price = price
+            new_item.detail = detail
+
+            new_item.save()
+            return redirect(to="/home")
+        else:
+            return render(request, "myapp/sell.html", context)
+    return render(request, "myapp/sell.html", context)
 
 
 # アカウント設定画面

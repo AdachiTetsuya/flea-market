@@ -6,5 +6,26 @@
 <link rel="stylesheet" href="{% static 'myapp/css/sell.css' %}">
 {% endblock %}
 
-{% block header %}{% endblock %}
+{% block content %}
+<div class="sell">
+    <form action="{% url 'myapp:sell' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="出品">
+
+        {# エラーメッセージを表示 #}
+        {% if form.errors %}
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+             {% endfor %}
+        {% endif %}
+    </form>
+    {% for error in form.errors %}
+    {{ error }}
+    {% endfor %}
+
+</div>
+{% endblock %}
 

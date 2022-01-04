@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block extra_style %}
-<link rel="stylesheet" href="{% static 'myapp/css/index.css' %}">
+<link rel="stylesheet" href="{% static 'myapp/css/login_list.css' %}">
 {% endblock %}
 
 {% block header %}
@@ -19,12 +19,29 @@
 
 {% block content %}
 <div class="account">
-会員登録
-    <div class="index-buttons">
-        <a href="{% url 'account_signup' %}" class="index-button">メールで会員登録</a>
-        <a href="{% url 'line_login' %}" class="index-button">lineで会員登録</a>
-        <a href="{% url 'twitter_login' %}" class="index-button">twitterで会員登録</a>
-        <a href="{% url 'account_login' %}" class="index-button">ログイン</a>
+    <div class="title">ログイン</div>
+    <div class="login_buttons">
+        <a href="{% url 'account_login' %}">
+            <div class="login_button_wrap" id="mail">
+                <i class="login_button_icon"></i>
+                <span class="login_button_text">メールアドレスでログイン</span>
+            </div>
+        </a>
+        <a href="{% url 'line_login' %}">
+            <div class="login_button_wrap" id="line">
+                <i class="login_button_icon"></i>
+                <span class="login_button_text">LINEでログイン</span>
+            </div>
+        </a>
+        <a href="{% url 'twitter_login' %}">
+            <div class="login_button_wrap" id="twitter">
+                <i class="login_button_icon"></i>
+                <span class="login_button_text">Twitterでログイン</span>
+            </div>
+        </a>
+
+
     </div>
+    
 </div>
 {% endblock %}

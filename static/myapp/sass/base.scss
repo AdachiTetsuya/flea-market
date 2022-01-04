@@ -1,0 +1,176 @@
+
+$header-height: 56px;
+$header-container-side_margin: 16px;
+$header-color: #eee;
+$transition_time: 0.2s;
+
+
+
+/* common */
+html {
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+body {
+    margin: 0;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: opacity $transition_time;
+}
+
+button{
+    cursor: pointer;
+}
+ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* header */
+.header{
+    position: fixed;
+    width: 100vw;
+    height: $header-height;
+    border-bottom: solid 1px $header-color;
+    background-color: #fff;
+    z-index: 1;
+
+    .header-container{
+        display: flex;
+        margin: auto $header-container-side_margin;
+        height:$header-height;
+        justify-content: space-between;
+        align-items: center;
+        gap: 4px;
+
+        .site-icon{
+            font-size: 2rem;
+        }
+
+        .search-form{
+            display: flex;
+            width: calc(100% - 450px);
+            border: 1px solid #ccc;
+
+            .search-input{
+                width: 100%;
+                font-size: 20px;
+                border: none;
+                background: #eee;
+                outline: none;
+            }
+            .search_button{
+                border: none;
+            }
+        }
+
+        ul{
+            display: flex;
+            gap: 0 1rem;
+            align-items: center;
+
+            li{
+                transition: background-color $transition_time;
+                a{
+                    display: flex;
+                    flex-direction: column;
+                    text-align: center;
+                    align-items: center;
+    
+                    i{
+                        font-size: 1.7rem;
+                    }
+    
+                    p{
+                        margin: 0;
+                    }
+    
+                }
+            }
+            li:hover{
+                background-color: $header-color;
+            }
+        }
+    }
+}
+
+// 出品ボタン
+.sell-btn{
+    box-sizing: border-box;
+    font-size: 1rem;
+    border: none;
+    width: 56px;
+    height: 36px;
+    background: rgb(255, 71, 71);
+    font-weight: bold;
+    color: white;
+    border-radius: 5px;
+    transition: opacity $transition_time;
+}
+.sell-btn:hover{
+    opacity: 0.8;
+}
+
+
+/* ユーザーアイコンの表示 */
+.user_icon {
+    /* 縦横の長さを合わせる */
+    height: 1.9rem;
+    width: 1.9rem;
+    border: solid 1px #000;
+    border-radius: 50%;
+    object-fit: cover;
+
+}
+
+// カテゴリー検索へのリンク
+.category_content{
+    display: none;
+    position: absolute;
+    top:$header-height - 14px;
+    left: 140px;
+    width: calc(100% - 482px);
+    border: 1px solid #000;
+    border-radius: 3px;
+    box-shadow: 2px 2px 4px rgba(158, 158, 158, 0.801);
+    background-color: white;
+    transition: background-color $transition_time;
+
+    p{
+        margin: 0;
+        padding: 1rem;
+    }
+}
+
+.category_content:hover{
+    background-color: $header-color;
+}
+
+//アカウント設定へのリンク
+.account_content{
+    display: none;
+    position: absolute;
+    top:$header-height - 2px;
+    right: 20px;
+
+    li{
+        border: 1px solid #000;
+        border-radius: 3px;
+        padding: 1.0rem 1.5rem;
+        background-color: white;
+        transition: background-color $transition_time;
+        box-shadow: 2px 2px 4px rgba(158, 158, 158, 0.801);
+    }
+    li:hover{
+        background-color: $header-color;
+    }
+}
+
+
+
+
+

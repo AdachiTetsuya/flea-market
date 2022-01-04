@@ -8,16 +8,19 @@
 
 {% block content %}
 <div class="category">
-    <ul>
-        {% for category in Category %}
-        <li>
-            <a href="{% url 'myapp:search' category.value %}" class="category-link">
-                {{ category.label }}
-                </form>
-            </a>
-        </li>
-        {% endfor %}
-    </ul>
+    <div class="category_title">カテゴリー</div>
+    <div class="category_container">
+        <ul>
+            {% for category in Category %}
+            <li>
+                <a href="#" class="category-link">
+                    <p>{{ category.label }}</p>
+                    <p>></p>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
 </div>
 {% endblock %}
 

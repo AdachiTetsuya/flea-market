@@ -8,20 +8,21 @@
 
 {% block content %}
 <div class="home">
-    <ul class="item-list">
+    <div class="home_title">商品一覧</div>
+    <ul class="item-container">
         {% for item in items %}
         <li class="item-list__item">
             <a class="item-list__link" href="{% url 'myapp:item' item.id %}">
                 <img class="item-list__image" src="{{ item.image.url }}" alt="商品の写真">
-                <div class="item-list__price">{{ item.price }}円</div>
-                <div class="item-list__price">{{ item.name }}</div>
+                <span class="item-list__price">¥{{ item.price }}</span>
+                <div class="item-list__name">{{ item.name }}</siv>
             </a>
         </li>
         {% empty %}
             <p>商品がありません</p>
         {% endfor %}
     </ul>
-
 </div>
 {% endblock %}
+
 

@@ -1,0 +1,48 @@
+.account {
+  padding-top: 56px;
+}
+
+.account .title {
+  padding: 2rem 0 1rem;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.account .login_buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 50%;
+  margin: 0 auto;
+  text-align: center;
+  gap: 1rem;
+}
+
+.account .login_buttons a {
+  display: block;
+}
+
+.account .login_buttons a .login_button_wrap {
+  border-radius: 5px;
+}
+
+.account .login_buttons a .login_button_wrap .login_button_text {
+  text-align: center;
+}
+
+.account .login_buttons a .login_button_wrap#mail {
+  background-color: #ff4747;
+}
+
+.account .login_buttons a .login_button_wrap#line {
+  background-color: #47ff56;
+}
+
+.account .login_buttons a .login_button_wrap#twitter {
+  background-color: #47daff;
+}

@@ -8,28 +8,46 @@
 
 {% block content %}
 <div class="item">
-    <img class="item_image" src="{{ item.image.url }}" alt="商品の写真">
-    <div>{{ item.name }}</div>
-    <div>{{ item.price }}円</div>
-    <button>購入手続きへ</button>
-    <div>商品の説明</div>
-    <div>{{ item.detail }}</div>
-    <div>商品の情報</div>
-    <ul>
-        <li>
-            カテゴリー
-            {{ category }}
-        </li>
-        <li>
-            商品の状態
-            {{ quality }}
-        </li>
-    </ul>
-    出品者
-    <a class="seller_link" href="#">
-        <img class="seller_icon" src="{{ item.seller.icon.url }}" alt="出品者のアイコン画像">
-        {{ item.seller.username }}
-    </a>
+    <div class="item_container">
+        <div class="item_image_wrap">
+            <img class="item_image" src="{{ item.image.url }}" alt="商品の写真">
+        </div>
+        <div class="item_about">
+            <div class="item_name">{{ item.name }}</div>
+            <div class="item_price">¥{{ item.price }}</div>
+            <button class="item_button">購入手続きへ</button>
+            <div class="item_detail">
+                <p class="item_detail_title">商品の説明</p>
+                {{ item.detail|linebreaksbr }}
+            </div>
+            <div class="item_info">
+                <p class="item_info_title">商品の情報</p>
+                <ul>
+                    <li>
+                        <span>カテゴリー</span>
+                        {{ category }}
+                    </li>
+                    <li>
+                        <span>商品の状態</span>
+                        {{ quality }}
+                    </li>
+                </ul>
+                
+            </div>
+            <div class="item_seller">
+                <div class="item_seller_title">出品者</div>
+                <a class="seller_link" href="#">
+                    <span class="seller_info_board">
+                        <img class="seller_icon" src="{{ item.seller.icon.url }}" alt="出品者のアイコン画像">
+                        <span class="seller_name">{{ item.seller.username }}</span>
+                        <span class="next_icon">></span>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
+
+<script type='text/javascript' src="{% static 'myapp/js/item.js' %}"></script>
 
