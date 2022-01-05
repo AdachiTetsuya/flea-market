@@ -1,7 +1,137 @@
-.settings{
-    padding: 56px;
+.settings {
+  padding-top: 56px;
 }
 
-.introduction{
-    outline: 1px solid red;
+.settings .container {
+  padding-top: 3rem;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.settings .container .my_profile_container {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1rem;
+}
+
+.settings .container .my_profile_container .my_profile {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 1.0rem;
+  width: 60%;
+  margin: 0 auto;
+}
+
+.settings .container .my_profile_container .my_profile .name_board {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.settings .container .my_profile_container .my_profile .name_board .name_board_left {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 1rem;
+}
+
+.settings .container .my_profile_container .my_profile .name_board .name_board_left .user_icon {
+  width: 4rem;
+  height: 4rem;
+}
+
+.settings .container .my_profile_container .my_profile .name_board .name_board_left .user_name {
+  margin: 0.5rem 0;
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+
+.settings .container .my_profile_container .my_profile .name_board .name_board_right {
+  margin: auto 0;
+  border: 1px solid #ff4747;
+  border-radius: 5px;
+}
+
+.settings .container .my_profile_container .my_profile .name_board .name_board_right p {
+  color: #ff4747;
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: bold;
+  padding: 5px 2px;
+}
+
+.settings .container .my_profile_container .my_profile .name_board .name_board_right:hover {
+  cursor: pointer;
+  background-color: #ffe2e2;
+}
+
+.settings .container .my_profile_container .my_profile .sell_buy_count {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 0.8rem;
+}
+
+.settings .container .my_profile_container .my_profile .sell_buy_count div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 0.2rem;
+}
+
+.settings .container .my_profile_container .my_profile .sell_buy_count div p {
+  margin: 0;
+  color: gray;
+  font-size: 0.8rem;
+}
+
+.settings .container .my_profile_container .my_profile .sell_buy_count div span {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.settings .container .my_profile_container .my_profile .sell_buy_count > :first-child {
+  border-right: 1.5px solid #ddd;
+  padding-right: 1rem;
+}
+
+.settings .container .my_profile_container .my_profile .introduction p {
+  margin: 0 0 0.2rem;
+  color: gray;
+  font-size: 0.8rem;
+}
+
+.settings .container .settings_item_container {
+  width: 60%;
+  margin: 4rem auto;
+}
+
+.settings .container .settings_item_container ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 3rem;
+  width: 60%;
+  margin: 0 auto;
+}
+
+.settings .container .settings_item_container ul li {
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  padding: 1rem;
+}
+
+.settings .container .settings_item_container ul li:hover {
+  background-color: #eee;
 }

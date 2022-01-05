@@ -15,7 +15,15 @@
         <div class="item_about">
             <div class="item_name">{{ item.name }}</div>
             <div class="item_price">¥{{ item.price }}</div>
-            <button class="item_button">購入手続きへ</button>
+            <a href="#">
+                <button class="item_button" id="item_button">
+                    {% if item.is_purchased %}
+                        売り切れました
+                    {% else %}
+                        購入手続きへ
+                    {% endif %}
+                </button>
+            </a>
             <div class="item_detail">
                 <p class="item_detail_title">商品の説明</p>
                 {{ item.detail|linebreaksbr }}
@@ -36,7 +44,7 @@
             </div>
             <div class="item_seller">
                 <div class="item_seller_title">出品者</div>
-                <a class="seller_link" href="#">
+                <a class="seller_link" href="{% url 'myapp:seller_profile' item.seller.id %}">
                     <span class="seller_info_board">
                         <img class="seller_icon" src="{{ item.seller.icon.url }}" alt="出品者のアイコン画像">
                         <span class="seller_name">{{ item.seller.username }}</span>
@@ -49,5 +57,8 @@
 </div>
 {% endblock %}
 
-<script type='text/javascript' src="{% static 'myapp/js/item.js' %}"></script>
 
+{% block script %}
+{{ item.is_purchased|json_script:'is_purchased' }}
+<script type='text/javascript' src="{% static 'myapp/js/item.js' %}"></script>
+{% endblock %}

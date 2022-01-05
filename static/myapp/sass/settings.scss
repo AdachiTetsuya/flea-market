@@ -1,0 +1,119 @@
+.settings{
+    padding-top: 56px;
+
+    .container{
+        padding-top: 3rem;
+        width: 90%;
+        margin: 0 auto;
+        .my_profile_container{
+            border-bottom: 1px solid #eee;
+            padding-bottom: 1rem;
+
+            .my_profile{
+                display: flex;
+                flex-direction: column;
+                gap: 1.0rem;
+                width: 60%;
+                margin: 0 auto;
+        
+                .name_board{
+                    display: flex;
+                    justify-content: space-between;
+
+                    .name_board_left{
+                        display: flex;
+                        gap: 1rem;
+
+                        .user_icon{
+                            width: 4rem;
+                            height: 4rem;
+                        }
+            
+                        .user_name{
+                            margin: 0.5rem 0;
+                            font-weight: bold;
+                            font-size: 1.3rem;
+            
+                        }
+                    }
+                    .name_board_right{
+                        margin: auto 0;
+                        border: 1px solid rgb(255, 71, 71);
+                        border-radius: 5px;
+                        
+                        p{
+                            color: rgb(255, 71, 71);
+                            margin: 0;
+                            font-size: 0.8rem;
+                            font-weight: bold;
+                            padding: 5px 2px;
+                            
+                        }
+                    }
+                    .name_board_right:hover{
+                        cursor: pointer;
+                        background-color: rgb(255, 226, 226);
+                    }
+        
+                }
+        
+                .sell_buy_count{
+                    display: flex;
+                    gap: 0.8rem;
+                    div{
+                        display: flex;
+                        gap: 0.2rem;
+                        
+                        p{
+                            margin: 0;
+                            color: rgb(128, 128, 128);
+                            font-size: 0.8rem;
+                        }
+                        span{
+                            font-weight: bold;
+                            font-size: 1.1rem;
+                        }
+                    }
+                }
+                .sell_buy_count > :first-child{
+                    border-right: 1.5px solid #ddd;
+                    padding-right: 1rem;
+                }
+        
+                .introduction{
+                    p{
+                        margin: 0 0 0.2rem;
+                        color: rgb(128, 128, 128);
+                        font-size: 0.8rem;
+                        
+                    }
+                    
+                }
+            }
+        }
+
+        .settings_item_container{
+            
+            width: 60%;
+            margin: 4rem auto;
+            ul{
+                display: flex;
+                flex-direction: column;
+                gap: 3rem;
+                width: 60%;
+                margin: 0 auto;
+
+                li{
+                    border: 1px solid #aaa;
+                    border-radius: 5px;
+                    padding: 1rem;
+                }
+                li:hover{
+                    background-color: #eee;
+                }
+            }
+        }
+
+
+    }
+}

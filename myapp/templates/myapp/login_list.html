@@ -23,24 +23,32 @@
     <div class="login_buttons">
         <a href="{% url 'account_login' %}">
             <div class="login_button_wrap" id="mail">
-                <i class="login_button_icon"></i>
+                <i class="bi bi-envelope" id="mail"></i>
                 <span class="login_button_text">メールアドレスでログイン</span>
             </div>
         </a>
         <a href="{% url 'line_login' %}">
             <div class="login_button_wrap" id="line">
-                <i class="login_button_icon"></i>
+                <i class="bi bi-line" id="line"></i>
                 <span class="login_button_text">LINEでログイン</span>
             </div>
         </a>
         <a href="{% url 'twitter_login' %}">
             <div class="login_button_wrap" id="twitter">
-                <i class="login_button_icon"></i>
+                <i class="bi bi-twitter" id="twitter"></i>
                 <span class="login_button_text">Twitterでログイン</span>
             </div>
         </a>
-
-
+    </div>
+    <div class="signup_button_container">
+        <div class="sign_up_title">
+            <span>アカウントをお持ちでない方</span>
+        </div>
+        <a href="{% url 'myapp:signup_list' %}">
+            <div class="signup_button_wrap">
+                <span class="signup_button_text">会員登録</span>
+            </div>
+        </a>
     </div>
     
 </div>

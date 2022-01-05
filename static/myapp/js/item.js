@@ -1,13 +1,8 @@
 'use strict';
 
-$(function(){
-    $('#textarea')
-    .on('input', function(){
-      if ($(this).outerHeight() > this.scrollHeight){
-        $(this).height(1)
-      }
-      while ($(this).outerHeight() < this.scrollHeight){
-        $(this).height($(this).height() + 1)
-      }
-    });
-});
+
+const item_button = document.getElementById('item_button')
+const is_purchased = JSON.parse(document.getElementById('is_purchased').textContent)
+if(is_purchased){
+  item_button.classList.add('purchased')
+}

@@ -1,3 +1,120 @@
 .sell {
   padding-top: 56px;
 }
+
+.sell .container {
+  width: 50%;
+  margin: 0 auto;
+  padding-top: 2rem;
+}
+
+.sell .container .title {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.sell .container .sell_form_content {
+  margin-bottom: 3rem;
+}
+
+.sell .container .sell_form_content .sell_form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 2rem;
+}
+
+.sell .container .sell_form_content .sell_form .field {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sell .container .sell_form_content .sell_form .field .label {
+  font-weight: bold;
+  color: #666;
+}
+
+.sell .container .sell_form_content .sell_form .field input#id_image {
+  text-align: center;
+  border: 2px dotted #eee;
+  padding: 2rem;
+}
+
+.sell .container .sell_form_content .sell_form .field input#id_image:hover {
+  cursor: pointer;
+}
+
+.sell .container .sell_form_content .sell_form .field select {
+  border: none;
+  outline: 2px solid #eee;
+  border-radius: 5px;
+  padding: 0.8rem 0.5rem;
+  font-size: 1rem;
+}
+
+.sell .container .sell_form_content .sell_form .field select:focus {
+  outline: 1px solid #ff4747;
+}
+
+.sell .container .sell_form_content .sell_form .field select:hover {
+  cursor: pointer;
+}
+
+.sell .container .sell_form_content .sell_form .field input#id_name {
+  border: none;
+  outline: 2px solid #eee;
+  border-radius: 5px;
+  padding: 0.7rem 0.5rem;
+  font-size: 1.1rem;
+}
+
+.sell .container .sell_form_content .sell_form .field textarea#id_detail {
+  border: none;
+  outline: 2px solid #eee;
+  border-radius: 5px;
+  resize: vertical;
+  padding: 0.6rem;
+  font-size: 0.9rem;
+}
+
+.sell .container .sell_form_content .sell_form .field input#id_price {
+  border: none;
+  outline: 2px solid #eee;
+  border-radius: 5px;
+  padding: 0.7rem 0.5rem;
+  font-size: 1.2rem;
+  text-align: right;
+}
+
+.sell .container .sell_form_content .sell_form .field input#id_price::-webkit-outer-spin-button,
+.sell .container .sell_form_content .sell_form .field input#id_price::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.sell .container .sell_form_content .sell_form .sell-button {
+  border: none;
+  width: 80%;
+  height: 3rem;
+  margin: 1.5rem auto;
+  background-color: #ff4747;
+  font-weight: bold;
+  color: white;
+  font-size: 1.2rem;
+  border-radius: 5px;
+}
+
+.sell .container .sell_form_content .sell_form .sell-button:hover {
+  cursor: pointer;
+}

@@ -2,7 +2,7 @@
     padding-top: 56px;
 
     .title{
-        padding: 2rem 0 1rem;
+        padding: 3rem 0 1.5rem;
         text-align: center;
         font-size: 1.5rem;
         font-weight: bold;
@@ -12,24 +12,33 @@
     .login_buttons{
         display: flex;
         flex-direction: column;
-        width: 50%;
+        width: 40%;
         margin: 0 auto;
-        text-align: center;
-        gap: 1rem;
+        padding-bottom: 2.5rem;
+        border-bottom: 1px solid #eee;
+        gap: 2rem;
 
         a{
             display: block;
 
             .login_button_wrap{
-                
+                position: relative;
                 border-radius: 5px;
+                text-align: center;
+                padding: 0.6rem 0;
 
-                .login_button_icon{
-                    
+                i{
+                    position: absolute;
+                    font-size: 1.6rem;
+                    left: 1rem;
+                    top: 7px;
+                    color: white;
                 }
 
                 .login_button_text{
-                    text-align: center;
+                    color: white;
+                    font-weight: bold;
+                    
                 }
             }
 
@@ -44,6 +53,31 @@
             }
         }
 
+    }
+
+    .signup_button_container{
+        display: flex;
+        flex-direction: column;
+        width: 40%;
+        margin: 2rem auto;
+
+        .sign_up_title{
+            text-align: center;
+            color: #555;
+            padding-bottom: 1rem;
+        }
+
+        .signup_button_wrap{
+            text-align: center;
+            border: 1px solid rgb(255, 71, 71);
+            padding: 0.6rem 0;
+            border-radius: 5px;
+
+            .signup_button_text{
+                color: rgb(255, 71, 71);
+                font-weight: bold;
+            }
+        }
     }
 
     

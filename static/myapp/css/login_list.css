@@ -3,7 +3,7 @@
 }
 
 .account .title {
-  padding: 2rem 0 1rem;
+  padding: 3rem 0 1.5rem;
   text-align: center;
   font-size: 1.5rem;
   font-weight: bold;
@@ -17,10 +17,11 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  width: 50%;
+  width: 40%;
   margin: 0 auto;
-  text-align: center;
-  gap: 1rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid #eee;
+  gap: 2rem;
 }
 
 .account .login_buttons a {
@@ -28,11 +29,23 @@
 }
 
 .account .login_buttons a .login_button_wrap {
+  position: relative;
   border-radius: 5px;
+  text-align: center;
+  padding: 0.6rem 0;
+}
+
+.account .login_buttons a .login_button_wrap i {
+  position: absolute;
+  font-size: 1.6rem;
+  left: 1rem;
+  top: 7px;
+  color: white;
 }
 
 .account .login_buttons a .login_button_wrap .login_button_text {
-  text-align: center;
+  color: white;
+  font-weight: bold;
 }
 
 .account .login_buttons a .login_button_wrap#mail {
@@ -45,4 +58,34 @@
 
 .account .login_buttons a .login_button_wrap#twitter {
   background-color: #47daff;
+}
+
+.account .signup_button_container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 40%;
+  margin: 2rem auto;
+}
+
+.account .signup_button_container .sign_up_title {
+  text-align: center;
+  color: #555;
+  padding-bottom: 1rem;
+}
+
+.account .signup_button_container .signup_button_wrap {
+  text-align: center;
+  border: 1px solid #ff4747;
+  padding: 0.6rem 0;
+  border-radius: 5px;
+}
+
+.account .signup_button_container .signup_button_wrap .signup_button_text {
+  color: #ff4747;
+  font-weight: bold;
 }

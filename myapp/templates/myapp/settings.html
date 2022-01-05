@@ -8,28 +8,38 @@
 
 {% block content %}
 <div class="settings">
-    名前:{{user.username }}
-    <img class="user_icon" src="{{ user.icon.url }}" alt="アイコン画像">
-    出品数:{{ user.sell_num }}
-    購入数:{{ user.buy_num }}
-    <div class="introduction">
-        <p>自己紹介</p>
-        {{ user.introduction }}
-    </div>
-
-    <div class="settings_item">
-        <ul>
-            <a href="{% url 'myapp:change_profile' %}">
-                <li>プロフィール変更</li>
-            </a>
-            <a href="{% url 'account_email' %}">
-                <li>メールアドレス変更</li>
-            </a>
-            <a href="{% url 'account_reset_password' %}">
-                <li>パスワード変更</li>
-            </a>
-        </ul>
-
+    <div class="container">
+        <div class="my_profile_container">
+            <div class="my_profile">
+                <div class="name_board">
+                    <div class="name_board_left">
+                        <img class="user_icon" src="{{ user.icon.url }}" alt="アイコン画像">
+                        <p class="user_name">{{user.username }}</p>
+                    </div>
+                    <div class="name_board_right">
+                        <a href="{% url 'myapp:change_profile' %}"><p>プロフィールを編集</p></a>
+                    </div>
+                </div>
+                <div class="sell_buy_count">
+                    <div><p>出品数</p><span>{{ user.sell_num }}</span></div>
+                    <div><p>購入数</p><span>{{ user.buy_num }}</span></div>
+                </div>
+                <div class="introduction">
+                    <p>自己紹介</p>
+                    <div>{{ user.introduction }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="settings_item_container">
+            <ul>
+                <a href="{% url 'account_email' %}">
+                    <li>メールアドレス変更</li>
+                </a>
+                <a href="{% url 'account_reset_password' %}">
+                    <li>パスワード変更</li>
+                </a>
+            </ul>
+        </div>
     </div>
 
 </div>

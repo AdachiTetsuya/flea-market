@@ -51,6 +51,13 @@
                 font-size: 1rem;
                 border-radius: 5px;
             }
+            .item_button.purchased{
+                background-color: rgb(173, 173, 173);
+                color: #222;
+            }
+            .item_button.purchased:hover{
+                cursor: not-allowed;
+            }
 
             .item_detail{
                 padding-top: 1.5rem;

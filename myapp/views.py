@@ -122,7 +122,7 @@ class SettingsView(generic.TemplateView):
 
 # プロフィール編集画面
 def change_profile(request):
-    obj = request.user
+    obj = User.objects.get(username=request.user.username)
     if(request.method == 'POST'):
         form=UserForm(request.POST,request.FILES)
 
@@ -140,3 +140,16 @@ def change_profile(request):
         'form':UserForm(instance=obj),
     }
     return render(request,'myapp/change_profile.html',context)
+
+
+# 販売者プロフィール画面
+class SellerProfileView(LoginRequiredMixin,View):
+    def get(self, request, seller_id):
+        seller = get_object_or_404(User, id=seller_id)
+        items = Item.objects.filter(seller = seller)
+
+        context = {
+            "seller": seller,
+            "items":items,
+        }
+        return render(request, "myapp/seller_profile.html", context)

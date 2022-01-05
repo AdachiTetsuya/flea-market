@@ -13,6 +13,9 @@
         {% for item in items %}
         <li class="item-list__item">
             <a class="item-list__link" href="{% url 'myapp:item' item.id %}">
+                {% if item.is_purchased %}
+                    <div class="sold_text">SOLD</div>
+                {% endif %}
                 <img class="item-list__image" src="{{ item.image.url }}" alt="商品の写真">
                 <span class="item-list__price">¥{{ item.price }}</span>
                 <div class="item-list__name">{{ item.name }}</siv>

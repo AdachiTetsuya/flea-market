@@ -8,24 +8,24 @@
 
 {% block content %}
 <div class="sell">
-    <form action="{% url 'myapp:sell' %}" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="出品">
+    <div class="container">
+        <div class="title">商品の出品</div>
+        <div class="sell_form_content">
+            <form action="{% url 'myapp:sell' %}" method="POST" enctype="multipart/form-data" class="sell_form">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="field">
+                        <label class="label" for="{{ field.id_for_label }}">{{ field.label }}:</label>
+                        {{ field }}
 
-        {# エラーメッセージを表示 #}
-        {% if form.errors %}
-            {% for field in form %}
-                {% for error in field.errors %}
-                    <p>{{ error }}</p>
+                        {{ field.errors }}
+                    </div>
                 {% endfor %}
-             {% endfor %}
-        {% endif %}
-    </form>
-    {% for error in form.errors %}
-    {{ error }}
-    {% endfor %}
-
+                
+                <input type="submit" value="出品" class="sell-button">
+            </form>
+        </div>
+    </div>
 </div>
 {% endblock %}
 

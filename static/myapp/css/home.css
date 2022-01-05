@@ -29,6 +29,16 @@
   /* 商品の写真の表示 */
 }
 
+.home ul li .sold_text {
+  position: absolute;
+  top: 0;
+  background-color: #ff4747;
+  color: white;
+  font-size: 1.8rem;
+  padding: 10px 10px;
+  border-radius: 0 0 5px 0;
+}
+
 .home ul li .item-list__image {
   /* 縦横の長さを合わせる */
   height: 17rem;

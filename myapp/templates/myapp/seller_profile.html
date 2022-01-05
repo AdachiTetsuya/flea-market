@@ -1,0 +1,50 @@
+{% extends "myapp/base.html" %}
+
+{% load static %}
+
+{% block extra_style %}
+<link rel="stylesheet" href="{% static 'myapp/css/seller_profile.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="seller">
+    <div class="container">
+        <div class="seller_profile_container">
+            <div class="seller_profile">
+                <div class="name_board">
+                    <img class="user_icon" src="{{ seller.icon.url }}" alt="アイコン画像">
+                    <p class="user_name">{{seller.username }}</p>
+                </div>
+                <div class="sell_buy_count">
+                    <div><p>出品数</p><span>{{ seller.sell_num }}</span></div>
+                    <div><p>購入数</p><span>{{ seller.buy_num }}</span></div>
+                </div>
+                <div class="introduction">
+                    <p>自己紹介</p>
+                    <div>{{ seller.introduction }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="seller_item_container">
+            <div class="home_title">出品した商品</div>
+            <ul class="item-container">
+                {% for item in items %}
+                <li class="item-list__item">
+                    <a class="item-list__link" href="{% url 'myapp:item' item.id %}">
+                        {% if item.is_purchased %}
+                            <div class="sold_text">SOLD</div>
+                        {% endif %}
+                        <img class="item-list__image" src="{{ item.image.url }}" alt="商品の写真">
+                        <span class="item-list__price">¥{{ item.price }}</span>
+                        <div class="item-list__name">{{ item.name }}</siv>
+                    </a>
+                </li>
+                {% empty %}
+                    <p>商品がありません</p>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

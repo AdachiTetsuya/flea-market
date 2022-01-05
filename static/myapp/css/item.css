@@ -62,6 +62,15 @@
   border-radius: 5px;
 }
 
+.item .item_container .item_about .item_button.purchased {
+  background-color: #adadad;
+  color: #222;
+}
+
+.item .item_container .item_about .item_button.purchased:hover {
+  cursor: not-allowed;
+}
+
 .item .item_container .item_about .item_detail {
   padding-top: 1.5rem;
 }

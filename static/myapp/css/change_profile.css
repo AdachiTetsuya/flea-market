@@ -1,0 +1,89 @@
+.change_profile {
+  padding-top: 56px;
+}
+
+.change_profile .container {
+  width: 50%;
+  margin: 0 auto;
+  padding-top: 2rem;
+}
+
+.change_profile .container .title {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.change_profile .container .change_profile_content {
+  margin-bottom: 3rem;
+}
+
+.change_profile .container .change_profile_content .profile_form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 2rem;
+}
+
+.change_profile .container .change_profile_content .profile_form .field {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 0.5rem;
+}
+
+.change_profile .container .change_profile_content .profile_form .field .label {
+  font-weight: bold;
+  color: #666;
+}
+
+.change_profile .container .change_profile_content .profile_form .field input#id_username {
+  border: none;
+  outline: 2px solid #eee;
+  border-radius: 5px;
+  padding: 0.7rem 0.5rem;
+  font-size: 1.1rem;
+}
+
+.change_profile .container .change_profile_content .profile_form .field input#id_icon {
+  text-align: center;
+  border: 2px dotted #eee;
+  padding: 2rem;
+}
+
+.change_profile .container .change_profile_content .profile_form .field input#id_icon:hover {
+  cursor: pointer;
+}
+
+.change_profile .container .change_profile_content .profile_form .field textarea#id_introduction {
+  border: none;
+  outline: 2px solid #eee;
+  border-radius: 5px;
+  resize: vertical;
+  padding: 0.6rem;
+  font-size: 0.9rem;
+}
+
+.change_profile .container .change_profile_content .profile_form .profile-button {
+  border: none;
+  width: 80%;
+  height: 3rem;
+  margin: 1.5rem auto;
+  background-color: #ff4747;
+  font-weight: bold;
+  color: white;
+  font-size: 1.2rem;
+  border-radius: 5px;
+}
+
+.change_profile .container .change_profile_content .profile_form .profile-button:hover {
+  cursor: pointer;
+}

@@ -3,20 +3,29 @@
 {% load static %}
 
 {% block extra_style %}
-<link rel="stylesheet" href="{% static 'myapp/css/settings.css' %}">
+<link rel="stylesheet" href="{% static 'myapp/css/change_profile.css' %}">
 {% endblock %}
 
 {% block content %}
-<div class="settings">
-    <form action="{% url 'myapp:change_profile' %}" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
+<div class="change_profile">
+    <div class="container">
+        <div class="title">プロフィール設定</div>
+        <div class="change_profile_content">
+            <form action="{% url 'myapp:change_profile' %}" method="POST" enctype="multipart/form-data" class="profile_form">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="field">
+                        <label class="label" for="{{ field.id_for_label }}">{{ field.label }}:</label>
+                        {{ field }}
 
-        {{ form.as_p }}
-
-        <button type="submit" class="submit-btn">変更</button>
-    </form>
-
+                        {{ field.errors }}
+                    </div>
+                {% endfor %}
+                
+                <input type="submit" value="更新する" class="profile-button">
+            </form>
+        </div>
+    </div>
 </div>
 {% endblock %}
-
 

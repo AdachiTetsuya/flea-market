@@ -1,4 +1,4 @@
-.sell{
+.change_profile{
     padding-top: 56px;
 
     .container{
@@ -12,10 +12,10 @@
             font-weight: bold;
         }
 
-        .sell_form_content{
+        .change_profile_content{
 
             margin-bottom: 3rem;
-            .sell_form{
+            .profile_form{
                 display: flex;
                 flex-direction: column;
                 gap: 2rem;
@@ -27,30 +27,7 @@
                         font-weight: bold;
                         color: #666;
                     }
-                    input#id_image{
-                        text-align: center;
-                        border: 2px dotted #eee;
-                        padding: 2rem;
-                    }
-                    input#id_image:hover{
-                        cursor: pointer;
-                    }
-
-                    select{
-                        border: none;
-                        outline:2px solid #eee;
-                        border-radius: 5px;
-                        padding: 0.8rem 0.5rem;
-                        font-size: 1rem;
-                    }
-                    select:focus{
-                        outline: 1px solid rgb(255, 71, 71);
-                    }
-                    select:hover{
-                        cursor: pointer;
-                    }
-
-                    input#id_name{
+                    input#id_username{
                         border: none;
                         outline:2px solid #eee;
                         border-radius: 5px;
@@ -58,7 +35,17 @@
                         font-size: 1.1rem;
                     }
 
-                    textarea#id_detail{
+                    input#id_icon{
+                        text-align: center;
+                        border: 2px dotted #eee;
+                        padding: 2rem;
+                    }
+                    input#id_icon:hover{
+                        cursor: pointer;
+                    }
+
+
+                    textarea#id_introduction{
                         border: none;
                         outline:2px solid #eee;
                         border-radius: 5px;
@@ -67,22 +54,8 @@
                         font-size: 0.9rem;
                     }
 
-                    input#id_price{
-                        border: none;
-                        outline:2px solid #eee;
-                        border-radius: 5px;
-                        padding: 0.7rem 0.5rem;
-                        font-size: 1.2rem;
-                        text-align: right;
-                    }
-                    input#id_price::-webkit-outer-spin-button,
-                    input#id_price::-webkit-inner-spin-button {
-                        -webkit-appearance: none;
-                        margin: 0;
-                    }
-
                 }
-                .sell-button{
+                .profile-button{
                     border: none;
                     width: 80%;
                     height: 3rem;
@@ -94,7 +67,7 @@
                     border-radius: 5px;
                     
                 }
-                .sell-button:hover{
+                .profile-button:hover{
                     cursor: pointer;
                 }
             }
