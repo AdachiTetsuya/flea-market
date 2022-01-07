@@ -29,3 +29,12 @@ document.addEventListener('click', (e) => {
       
     }
 })
+
+// エンターキーでも送信できるように
+document.querySelector('#input-button').focus();
+document.querySelector('#input-button').onkeyup = function(e) {
+    if (e.keyCode === 13) {  // enter, return
+        document.querySelector('#search_button').click();
+    }
+};
+

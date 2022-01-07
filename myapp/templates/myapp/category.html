@@ -13,7 +13,7 @@
         <ul>
             {% for category in Category %}
             <li>
-                <a href="#" class="category-link">
+                <a href="{% url 'myapp:search' %}?category={{ category }}" class="category-link">
                     <p>{{ category.label }}</p>
                     <p>></p>
                 </a>

@@ -2,7 +2,6 @@
 /* headerを避ける */
 .category {
   padding-top: 56px;
-  outline: 1px solid blue;
   text-align: center;
   width: 100vw;
 }

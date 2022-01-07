@@ -7,6 +7,11 @@
         <link rel="stylesheet" type="text/css" href="{% static 'myapp/css/base.css' %}">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
         {% block extra_style %}{% endblock %}
+        {% block extra_js %}
+        <script type='text/javascript'>
+            sessionStorage.clear();
+        </script>
+        {% endblock %}
         <title>フリーマーケット</title>
     </head>
     <body>
@@ -18,13 +23,15 @@
                         <i class="bi bi-house"></i>
                     </div>
                 </a>
-                <form action="{% url 'myapp:search' %}" method="POST" class="search-form" autocomplete="off">
+                {% block form %}
+                <form action="{% url 'myapp:search' %}" method="GET" class="search-form" autocomplete="off">
                     {% csrf_token %}
 
-                    <input type="text" name="item_search" class="search-input" placeholder="何をお探しですか?" id="input-button">
+                    <input type="text" name="keyword" value="{{ request.GET.keyword }}" class="search-input" placeholder="何をお探しですか?" id="input-button">
 
-                    <button class="search_button"><i class="bi bi-search"></i></button>
+                    <button class="search_button" id="search_button"><i class="bi bi-search"></i></button>
                 </form>
+                {% endblock %}
                 <nav>
                     <ul>
                         <li>
@@ -101,8 +108,11 @@
         {% block content %}
         {% endblock %}
 
+
         {% block script %}
         {% endblock %}
+
+
 
         <script type='text/javascript' src="{% static 'myapp/js/base.js' %}"></script>
         

@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from django.http import request
 from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.views import generic
 from django .views.generic import View
@@ -27,11 +28,14 @@ class SignupListView(generic.TemplateView):
 
 #ホーム画面
 def home(request):
-    if request.method == 'GET':
+    items = Item.objects.filter(is_purchased=False).order_by("-sell_time")
+    if request.user.is_authenticated:
+        user = request.user
         items = (
-            Item.objects.filter(is_purchased=False)
-            .order_by("sell_time").reverse()
+            items.exclude(seller=user)
         )
+
+    if request.method == 'GET':
         context = {
             "items": items,
         }
@@ -40,14 +44,26 @@ def home(request):
 
 #検索画面
 def search(request):
-    if request.method == 'POST':
-        q_word = request.POST['item_search'].strip()
+    items = Item.objects.order_by("-sell_time")
+    if request.user.is_authenticated:
+        user = request.user
         items = (
-            Item.objects.filter(name__contains=q_word)
-            .order_by("sell_time").reverse()
+            items.exclude(seller=user)
         )
-        
+
+    if request.method == 'GET':
+        if 'keyword' in request.GET:
+            keyword = request.GET['keyword']
+            items = (
+                items.filter(name__contains=keyword)
+            )
+
+        if 'category' in request.GET:
+            categories = request.GET.getlist('category')
+            items = items.filter(category__in=categories)
+
         context = {
+            "Category":Category,
             "items": items,
         }
         return render(request, "myapp/search.html", context)
@@ -64,7 +80,7 @@ def category(request):
 
 
 #商品詳細の画面
-class ItemView(LoginRequiredMixin,View):
+class ItemView(View):
     def get(self, request, item_id):
         item = get_object_or_404(Item, id=item_id)
 
@@ -78,6 +94,7 @@ class ItemView(LoginRequiredMixin,View):
 
 
 #出品画面
+@login_required
 def sell(request):
     form = SellForm()
     context={
@@ -115,12 +132,12 @@ def sell(request):
 
 
 # アカウント設定画面
-class SettingsView(generic.TemplateView):
+class SettingsView(LoginRequiredMixin,generic.TemplateView):
     template_name = 'myapp/settings.html'
 
 
-
 # プロフィール編集画面
+@login_required
 def change_profile(request):
     obj = User.objects.get(username=request.user.username)
     if(request.method == 'POST'):
@@ -143,7 +160,7 @@ def change_profile(request):
 
 
 # 販売者プロフィール画面
-class SellerProfileView(LoginRequiredMixin,View):
+class SellerProfileView(View):
     def get(self, request, seller_id):
         seller = get_object_or_404(User, id=seller_id)
         items = Item.objects.filter(seller = seller)
