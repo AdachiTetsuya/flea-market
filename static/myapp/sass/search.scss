@@ -2,7 +2,7 @@
     padding-top: 56px;
 
     .search_container{
-        width: 90%;
+        width: 80%;
         margin: 0 auto;
         display: grid;
         grid-template-columns: repeat(4, 1fr);
@@ -18,17 +18,22 @@
                 padding-bottom: 0.5rem;
                 border-bottom: 1px solid #eee;
             }
-            .check_category{
+            .check_list{
+                padding-bottom: 1rem;
 
-                .check_category_title{
+                .check_list_title{
                     font-weight: bold;
-                    padding-bottom: 0.6rem;
+                    padding-bottom: 0.3rem;
                 }
-                .category_item{
-                    padding: 0.2rem 0;
+                .list_item{
+                    padding: 0.1rem 0;
                     font-size: 1.1rem;
+
+                    input.list_checkbox{
+                        margin-right: 0.5rem;
+                    }
                 }
-                .category_item:hover{
+                .list_item:hover{
                     background-color: #eee;
                     cursor: pointer;
                 }
@@ -53,6 +58,24 @@
                     margin: 0;
                     font-size: 0.8rem;
                     color: #666;
+                }
+            }
+
+            .result_option_container{
+
+                margin-top: 1rem;
+                display: flex;
+                gap: 50%;
+
+                .status_item{
+
+                    .status_checkbox{
+                        margin-right: 0.5rem;
+                    }
+                }
+
+                .sort_item{
+
                 }
             }
 

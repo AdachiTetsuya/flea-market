@@ -7,7 +7,7 @@ from django.http import HttpResponse
 from django.views import generic
 from django .views.generic import View
 
-from . models import Item,Category
+from . models import Item,Category,Quality,Sort
 from .forms import UserForm,SellForm
 
 
@@ -62,8 +62,28 @@ def search(request):
             categories = request.GET.getlist('category')
             items = items.filter(category__in=categories)
 
+        if 'status' in request.GET:
+            items = items.filter(is_purchased = False)
+
+        if 'quality' in request.GET:
+            qualities = request.GET.getlist('quality')
+            items = items.filter(quality__in=qualities)
+
+        if 'sort' in request.GET:
+            sort =  request.GET['sort']
+            if sort == "a_ceated_time":
+                items.order_by("-sell_time")
+            elif sort == "d_ceated_time":
+                items.order_by("sell_time")
+            elif sort == "a_price":
+                items.order_by("-price")
+            elif sort == "d_price":
+                items.order_by("price")
+
         context = {
             "Category":Category,
+            "Quality":Quality,
+            "Sort":Sort,
             "items": items,
         }
         return render(request, "myapp/search.html", context)

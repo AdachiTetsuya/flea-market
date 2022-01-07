@@ -24,7 +24,13 @@ class Quality(models.TextChoices):
     NO_DAMAGED = 'no_damaged','目立った傷や汚れなし'
     LITTLE_DAMAGED = 'little_damaged','やや傷や汚れあり'
     DAMAGED = 'damaged','傷や汚れあり'
-    BAD = 'BAD','全体的に状態が悪い'
+    BAD = 'bad','全体的に状態が悪い'
+
+class Sort(models.TextChoices):
+    A_CREATED_TIME = 'a_created_time','新しい順'
+    A_PRICE = 'a_price','価格の安い順'
+    D_CREATED_TIME = 'd_created_time','古い順'
+    D_PRICE = 'd_price','価格の高い順'
 
 
 class Item(models.Model):

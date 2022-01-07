@@ -31,12 +31,22 @@
     <div class="search_container">
         <div class="search_option_container">
             <p class="search_option_container_title">絞り込み</p>
-            <div class="check_category">
-                <div class="check_category_title">カテゴリー</div>
+            <div class="check_list">
+                <div class="check_list_title">カテゴリー</div>
                 {% for category in Category %}
                 <label for="{{ category.value }}">
-                    <div class="category_item">
-                        <input type="checkbox" id="{{ category.value }}" class="cattegory_checkbox" value="{{ category.value }}">{{ category.label }}
+                    <div class="list_item">
+                        <input type="checkbox" id="{{ category.value }}" class="list_checkbox search_checkbox" value="{{ category.value }}">{{ category.label }}
+                    </div>
+                </label>
+                {% endfor %}
+            </div>
+            <div class="check_list">
+                <div class="check_list_title">商品の状態</div>
+                {% for quality in Quality %}
+                <label for="{{ quality.value }}">
+                    <div class="list_item">
+                        <input type="checkbox" id="{{ quality.value }}" class="list_checkbox search_checkbox" value="{{ quality.value }}">{{ quality.label }}
                     </div>
                 </label>
                 {% endfor %}
@@ -46,6 +56,18 @@
             <div class="search_result_container_head">
                 <p class="search_result_container_title">{% if request.GET.keyword %}{{ request.GET.keyword }} の{% endif %}検索結果</p>
                 <p class="search_result_num">{{ items|length }}件</p>
+            </div>
+            <div class="result_option_container">
+                <label for="on_sale">
+                    <div class="status_item">
+                        <input type="checkbox" id="on_sale" class="status_checkbox search_checkbox" value="on_sale">販売中のみ表示
+                    </div>
+                </label>
+                <select id="sort" class="sort_item">
+                    {% for sort in Sort %}
+                    <option value="{{ sort.value }}">{{ sort.label }}</option>
+                    {% endfor %}
+                </select>
             </div>
             <ul class="item-container">
                 {% for item in items %}
