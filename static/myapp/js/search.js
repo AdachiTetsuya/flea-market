@@ -12,7 +12,7 @@ function getNowUrl(){
     // URLSearchParamsオブジェクトを取得
     var params = url.searchParams;
     // URLからGETパラメータを削除
-    
+
     params.delete('csrfmiddlewaretoken');
     params.delete('keyword');
     params.delete('category');
@@ -49,6 +49,11 @@ function SearchButtonClick(){
             }
         }
     }
+    //selectboxの入力状況を確認し、クエリパラメータに設定する
+    var selects = document.querySelector('[id="sort"]');
+    if(selects.value){
+        url.searchParams.append("sort",selects.value);
+    }
     location.replace(url);
 }
 
@@ -72,11 +77,15 @@ var addSessionStorage = function() {
     var session = sessionStorage;
     for(let i=0; i<session.length; i++){
         let key = session.key(i);
-        if(category_array.includes(key) || quality_array.includes(key)){
+        if(category_array.includes(key) || quality_array.includes(key) || key === 'on_sale'){
             if(session.getItem(key).toLowerCase() === 'true'){
                 document.querySelector(`input#${key}`).checked = true;
             }else{
                 document.querySelector(`input#${key}`).checked = false;
+            }
+        }else{
+            if(session.getItem(key).toLowerCase() === 'true'){
+                document.querySelector('[id="sort"]').selectedIndex = Number(key);
             }
         }
     }
@@ -93,4 +102,5 @@ select.onchange = event => {
     for (var i=0; i<4; i++) {
         sessionStorage.setItem(i, select.options[i].selected);
     }
+    SearchButtonClick();
 }

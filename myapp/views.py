@@ -44,14 +44,21 @@ def home(request):
 
 #検索画面
 def search(request):
-    items = Item.objects.order_by("-sell_time")
-    if request.user.is_authenticated:
-        user = request.user
-        items = (
-            items.exclude(seller=user)
-        )
-
+        
     if request.method == 'GET':
+        if 'sort' in request.GET:
+            sort =  request.GET['sort']
+            if sort == 'a_created_time':
+                items = Item.objects.order_by("-sell_time")
+            elif sort == 'd_created_time':
+                items = Item.objects.order_by("sell_time")
+            elif sort == 'a_price':
+                items = Item.objects.order_by("price")
+            elif sort == 'd_price':
+                items = Item.objects.order_by("-price")
+        else:
+            items = Item.objects.order_by("-sell_time")
+
         if 'keyword' in request.GET:
             keyword = request.GET['keyword']
             items = (
@@ -69,16 +76,9 @@ def search(request):
             qualities = request.GET.getlist('quality')
             items = items.filter(quality__in=qualities)
 
-        if 'sort' in request.GET:
-            sort =  request.GET['sort']
-            if sort == "a_ceated_time":
-                items.order_by("-sell_time")
-            elif sort == "d_ceated_time":
-                items.order_by("sell_time")
-            elif sort == "a_price":
-                items.order_by("-price")
-            elif sort == "d_price":
-                items.order_by("price")
+        if request.user.is_authenticated:
+            user = request.user
+            items.exclude(seller=user)
 
         context = {
             "Category":Category,

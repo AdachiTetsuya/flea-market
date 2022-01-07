@@ -37,6 +37,7 @@
 .search .search_container .search_option_container .check_list .list_item {
   padding: 0.1rem 0;
   font-size: 1.1rem;
+  border-radius: 5px;
 }
 
 .search .search_container .search_option_container .check_list .list_item input.list_checkbox {
@@ -79,8 +80,33 @@
   gap: 50%;
 }
 
+.search .search_container .search_result_container .result_option_container .status_item {
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
 .search .search_container .search_result_container .result_option_container .status_item .status_checkbox {
   margin-right: 0.5rem;
+}
+
+.search .search_container .search_result_container .result_option_container .status_item:hover {
+  background-color: #eee;
+  cursor: pointer;
+}
+
+.search .search_container .search_result_container .result_option_container .sort_item {
+  border: none;
+  color: #ff4747;
+  font-size: 1,2rem;
+  padding: 5px 10px;
+  border-radius: 5px;
+  outline: none;
+  font-size: 1.0rem;
+}
+
+.search .search_container .search_result_container .result_option_container .sort_item:hover {
+  cursor: pointer;
+  background-color: #ffe1e1;
 }
 
 .search .search_container .search_result_container .item-container {

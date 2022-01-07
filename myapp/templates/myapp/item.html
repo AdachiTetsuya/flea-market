@@ -15,7 +15,7 @@
         <div class="item_about">
             <div class="item_name">{{ item.name }}</div>
             <div class="item_price">¥{{ item.price }}</div>
-            <a href="#">
+            <a href="#" id="purchase_link">
                 <button class="item_button" id="item_button">
                     {% if item.is_purchased %}
                         売り切れました
@@ -27,6 +27,9 @@
             <div class="item_detail">
                 <p class="item_detail_title">商品の説明</p>
                 {{ item.detail|linebreaksbr }}
+            </div>
+            <div class="item_date">
+                <span></span>
             </div>
             <div class="item_info">
                 <p class="item_info_title">商品の情報</p>
