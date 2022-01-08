@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.views import generic
 from django .views.generic import View
+from django.views.generic.base import TemplateView
 
 from . models import Item,Category,Quality,Sort
 from .forms import UserForm,SellForm
@@ -16,10 +17,6 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 User = get_user_model()
-
-# 最初の画面
-class IndexView(generic.TemplateView):
-    template_name = "myapp/index.html"
 
 # ログイン選択画面
 class LoginListView(generic.TemplateView):
@@ -238,4 +235,42 @@ class SellerProfileView(View):
         }
         return render(request, "myapp/seller_profile.html", context)
 
-    
+#マイページ
+class MyPageView(generic.TemplateView):
+    template_name = "myapp/mypage.html"
+
+# class ListingsView(generic.TemplateView):
+#     template_name = "myapp/mypage_listings.html"
+
+#     def get_context_data(self, **kwargs):
+#         user = self.request.user
+#         items = Item.objects.filter(seller=user)
+#         ctx = super().get_context_data(**kwargs)
+#         if self.kwargs == 'listing':
+#             ctx['items'] = items.filter(is_purchased = False)
+#         return ctx
+
+class ListingsView(View):
+    def get(self, request, status):
+        if status == 'listing':
+            items = Item.objects.filter(seller=request.user,is_purchased = False)
+        elif status == 'in_progress':
+            items = Item.objects.filter(seller=request.user,is_purchased = True, is_got = False)
+        elif status == 'completed':
+            items = Item.objects.filter(seller=request.user,is_got = True)
+        context = {
+            "items": items,
+        }
+        return render(request, "myapp/mypage_listings.html",context)
+
+class PurchasesView(View):
+    def get(self, request, status):
+        if status == 'in_progress':
+            items = Item.objects.filter(buyer=request.user,is_purchased = True,is_got = False)
+        elif status == 'completed':
+            items = Item.objects.filter(buyer=request.user,is_got = True)
+
+        context = {
+            "items": items,
+        }
+        return render(request, "myapp/mypage_purchases.html",context)

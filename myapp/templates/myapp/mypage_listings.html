@@ -1,0 +1,21 @@
+{% extends "myapp/mypage.html" %}
+
+{% load static %}
+
+{% block title %}出品した商品{% endblock %}
+
+{% block item1 %}
+<a href="{% url 'myapp:mypage/listings' 'listing' %}">
+    <p class="option_text">出品中</p>
+</a>
+{% endblock %}
+{% block item2 %}
+<a href="{% url 'myapp:mypage/listings' 'in_progress' %}">
+    <p class="option_text">取引中</p>
+</a>
+{% endblock %}
+{% block item3 %}
+<a href="{% url 'myapp:mypage/listings' 'completed' %}">
+    <p class="option_text">売却済み</p>
+</a>
+{% endblock %}

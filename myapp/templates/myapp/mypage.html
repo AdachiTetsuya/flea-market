@@ -1,0 +1,80 @@
+{% extends "myapp/base.html" %}
+
+{% load static %}
+
+{% block extra_style %}
+<link rel="stylesheet" href="{% static 'myapp/css/mypage.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="mypage">
+    <div class="mypage_container">
+        <div class="mypage_left">
+            <div class="left_title">
+                <span>商品の管理</span>
+            </div>
+            <div class="left_item_board">
+                <a href="{% url 'myapp:mypage/listings' 'listing' %}" class="left_link">
+                    <div class="left_item">
+                        <div class="left_item_text">出品した商品</div>
+                        <p>＞</p>
+                    </div>
+                </a>
+                <a href="{% url 'myapp:mypage/purchases' 'in_progress' %}" class="left_link">
+                    <div class="left_item">
+                        <div class="left_item_text">購入した商品</div>
+                        <p>＞</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="mypage_right">
+            <div class="mypage_select">
+                <div class="right_title">
+                    <span>{% block title %}{% endblock %}</span>
+                </div>
+                <div class="mypage_selecter">
+                    {% block item1 %}
+                    <a href="">
+                        <p></p>
+                    </a>
+                    {% endblock %}
+                    {% block item2 %}
+                    <a href="">
+                        <p></p>
+                    </a>
+                    {% endblock %}
+                    {% block item3 %}
+                    <a href="">
+                        <p></p>
+                    </a>
+                    {% endblock %}
+                </div>
+            </div>
+            <div class="item_list_container">
+                <ul class="item-container">
+                    {% for item in items %}
+                    <li class="item-list__item">
+                        <a class="item-list__link" href="{% url 'myapp:item' item.id %}">
+                            {% if item.is_purchased %}
+                                <div class="sold_text">SOLD</div>
+                            {% endif %}
+                            <img class="item-list__image" src="{{ item.image.url }}" alt="商品の写真">
+                            <span class="item-list__price">¥{{ item.price }}</span>
+                            <div class="item-list__name">{{ item.name }}</siv>
+                        </a>
+                    </li>
+                    {% empty %}
+                        <p>商品がありません</p>
+                    {% endfor %}
+                </ul>
+            </div>
+            
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script type='text/javascript' src="{% static 'myapp/js/mypage.js' %}"></script>
+{% endblock %}

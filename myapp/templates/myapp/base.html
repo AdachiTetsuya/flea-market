@@ -84,12 +84,12 @@
                             アカウント設定
                         </li>
                     </a>
-                    <a href="#">
+                    <a href="{% url 'myapp:mypage/listings' 'listing' %}">
                         <li>
                             出品履歴
                         </li>
                     </a>
-                    <a href="#">
+                    <a href="{% url 'myapp:mypage/purchases' 'in_progress' %}">
                         <li>
                             購入履歴
                         </li>

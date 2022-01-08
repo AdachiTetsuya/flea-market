@@ -1,0 +1,169 @@
+@charset "UTF-8";
+.mypage {
+  padding-top: 56px;
+}
+
+.mypage .mypage_container {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[5];
+      grid-template-columns: repeat(5, 1fr);
+  gap: 2rem;
+  padding-top: 2rem;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.mypage .mypage_container .mypage_left {
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 1;
+  grid-column: 1 / 2;
+  padding-top: 4.5rem;
+}
+
+.mypage .mypage_container .mypage_left .left_title {
+  margin-bottom: 0.8rem;
+}
+
+.mypage .mypage_container .mypage_left .left_title span {
+  font-weight: bold;
+  color: #555;
+  font-size: 1.2rem;
+}
+
+.mypage .mypage_container .mypage_left .left_item_board {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.mypage .mypage_container .mypage_left .left_item_board .left_item {
+  border-top: 1px solid #eee;
+  padding: 0.8rem 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.mypage .mypage_container .mypage_left .left_item_board .left_item p {
+  margin: 0;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
+.mypage .mypage_container .mypage_left .left_item_board .left_item:hover {
+  cursor: pointer;
+  background-color: #eee;
+}
+
+.mypage .mypage_container .mypage_left .left_item_board > :last-child {
+  border-bottom: 1px solid #eee;
+}
+
+.mypage .mypage_container .mypage_right {
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 5;
+  grid-column: 2 / 7;
+}
+
+.mypage .mypage_container .mypage_right .mypage_select {
+  border-bottom: 1px solid #eee;
+}
+
+.mypage .mypage_container .mypage_right .mypage_select .right_title {
+  padding-bottom: 2rem;
+}
+
+.mypage .mypage_container .mypage_right .mypage_select .right_title span {
+  font-size: 1.7rem;
+  font-weight: bold;
+}
+
+.mypage .mypage_container .mypage_right .mypage_select .mypage_selecter {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.mypage .mypage_container .mypage_right .mypage_select .mypage_selecter p {
+  margin: 0;
+  padding: 0.6rem 1.8rem;
+  font-weight: bold;
+}
+
+.mypage .mypage_container .mypage_right .mypage_select .mypage_selecter p:hover {
+  background-color: #eee;
+}
+
+.mypage .mypage_container .mypage_right .item_list_container {
+  margin-left: 1rem;
+}
+
+.mypage .mypage_container .mypage_right .item_list_container ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  gap: 16px;
+  margin: 1rem 0;
+}
+
+.mypage .mypage_container .mypage_right .item_list_container ul li {
+  position: relative;
+  outline: 1px solid #eee;
+  /* 商品の写真の表示 */
+}
+
+.mypage .mypage_container .mypage_right .item_list_container ul li .sold_text {
+  position: absolute;
+  top: 0;
+  background-color: #ff4747;
+  color: white;
+  font-size: 1.8rem;
+  padding: 10px 10px;
+  border-radius: 0 0 5px 0;
+}
+
+.mypage .mypage_container .mypage_right .item_list_container ul li .item-list__image {
+  /* 縦横の長さを合わせる */
+  height: 17rem;
+  width: 17rem;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.mypage .mypage_container .mypage_right .item_list_container ul li .item-list__price {
+  position: absolute;
+  bottom: 40px;
+  left: 0;
+  padding: 2px 10px;
+  background-color: rgba(51, 51, 51, 0.726);
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: white;
+  letter-spacing: 1px;
+  border-radius: 0 10px 10px 0;
+}
+
+.mypage .mypage_container .mypage_right .item_list_container ul .item-list__item:hover {
+  opacity: 0.8;
+  outline: 1px solid #aaa;
+}
+
+.background {
+  background-color: #eee;
+}
+
+.textcolor {
+  color: #ff4747;
+  border-bottom: 3px solid #ff4747;
+}

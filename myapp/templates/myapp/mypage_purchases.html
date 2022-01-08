@@ -1,0 +1,18 @@
+{% extends "myapp/mypage.html" %}
+
+{% load static %}
+
+{% block title %}購入した商品{% endblock %}
+
+{% block item1 %}
+<a href="{% url 'myapp:mypage/purchases' 'in_progress' %}">
+    <p class="option_text">取引中</p>
+</a>
+{% endblock %}
+{% block item2 %}
+<a href="{% url 'myapp:mypage/purchases' 'completed' %}">
+    <p class="option_text">過去の取引</p>
+</a>
+{% endblock %}
+{% block item3 %}
+{% endblock %}

@@ -16,8 +16,8 @@
                 top: 0;
                 background-color: rgb(255, 71, 71);
                 color: white;
-                font-size: 3rem;
-                padding: 20px 30px;
+                font-size: 2.5rem;
+                padding: 3% 7%;
                 border-radius: 0 0 5px 0;
             }
 
@@ -37,6 +37,7 @@
             flex-direction: column;
             gap: 0.8rem;
             margin-top: 3.5rem;
+            margin-bottom: 10rem;
             grid-column: 3 / 5;
             padding-left: 6rem;
 
@@ -51,14 +52,13 @@
             }
 
             .item_button{
-                margin-top: 3rem;
                 width: 70%;
                 height: 3rem;
                 background-color: rgb(255, 71, 71);
                 font-weight: bold;
                 border: none;
                 color: white;
-                font-size: 1rem;
+                font-size: 2rem;
                 border-radius: 5px;
             }
             .item_button.purchased{
@@ -78,6 +78,13 @@
                     font-weight: bold;
                     font-size: 1.4rem;
                     color: rgb(95, 95, 95);
+                }
+
+                .item_date{
+                    padding-top: 1.5rem;
+                    span{
+                        color: #777;
+                    }
                 }
 
             }
