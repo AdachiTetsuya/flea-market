@@ -10,12 +10,16 @@
 <div class="item">
     <div class="item_container">
         <div class="item_image_wrap">
+            {% if item.is_purchased %}
+                <div class="sold_text">SOLD</div>
+            {% endif %}
             <img class="item_image" src="{{ item.image.url }}" alt="商品の写真">
         </div>
         <div class="item_about">
             <div class="item_name">{{ item.name }}</div>
             <div class="item_price">¥{{ item.price }}</div>
-            <a href="#" id="purchase_link">
+            {% if user.is_authenticated %}
+            <a href="{% url 'myapp:purchase' item.id %}" id="purchase_link">
                 <button class="item_button" id="item_button">
                     {% if item.is_purchased %}
                         売り切れました
@@ -24,6 +28,17 @@
                     {% endif %}
                 </button>
             </a>
+            {% else %}
+            <a href="{% url 'myapp:signup_list' %}" id="purchase_link">
+                <button class="item_button" id="item_button">
+                    {% if item.is_purchased %}
+                        売り切れました
+                    {% else %}
+                        購入手続きへ
+                    {% endif %}
+                </button>
+            </a>
+            {% endif %}
             <div class="item_detail">
                 <p class="item_detail_title">商品の説明</p>
                 {{ item.detail|linebreaksbr }}

@@ -1,0 +1,111 @@
+.purchase {
+  padding-top: 56px;
+}
+
+.purchase .purchase_container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 50%;
+  margin: 0 auto;
+  padding-top: 5rem;
+  gap: 1.5rem;
+}
+
+.purchase .purchase_container .purchase_title {
+  text-align: center;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1rem;
+}
+
+.purchase .purchase_container .purchase_title span {
+  font-weight: bold;
+  font-size: 1.8rem;
+}
+
+.purchase .purchase_container .purchase_detail {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 10%;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1.1rem;
+}
+
+.purchase .purchase_container .purchase_detail .purchase_image_wrap .purchase_image {
+  width: 7rem;
+  height: 7rem;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 5px;
+}
+
+.purchase .purchase_container .purchase_detail .detail_board .item_title {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.purchase .purchase_container .purchase_detail .detail_board .item_price {
+  margin: 0;
+  padding-top: 0.5rem;
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+
+.purchase .purchase_container .purchase_confirm {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 1rem;
+  margin: 0 auto;
+  width: 70%;
+  border: 1px solid #eee;
+  padding: 1rem 2rem;
+}
+
+.purchase .purchase_container .purchase_confirm .confirm_price {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.purchase .purchase_container .purchase_confirm .confirm_price .confirm_price_title {
+  font-weight: bold;
+}
+
+.purchase .purchase_container .purchase_confirm .confirm_price .confirm_price_num {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
+.purchase .purchase_container .purchase_confirm > :first-child {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.purchase .purchase_container .purchase_confirm > :last-child > :last-child {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.purchase .purchase_container .purchase_form_container {
+  padding-top: 1rem;
+  text-align: center;
+}
+
+.purchase .purchase_container .purchase_form_container span {
+  font-size: 1.5rem;
+  padding: 5px 30px;
+}

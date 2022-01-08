@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import environ
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -22,6 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'z!o2d&#@d2q$a)4dytu5672%o)8usu_kh8-dh6xfygzvj=1h*#'
 
+# django-environから環境変数を読み込む
+env = environ.Env()
+env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # Application definition
 
@@ -40,6 +44,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.line',
     'allauth.socialaccount.providers.twitter',
+
+    'stripe',
 
     'accounts.apps.AccountsConfig',
     'myapp.apps.MyappConfig',
@@ -138,6 +144,11 @@ STATICFILES_DIRS = [
 ]
 
 MEDIA_URL = '/media/'
+
+
+STRIPE_SECRET_KEY = env('STRIPE_SECRET_KEY')
+STRIPE_PUBLISHABLE_KEY = env('STRIPE_PUBLISHABLE_KEY')
+
 
 
 SITE_ID = 2

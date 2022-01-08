@@ -16,6 +16,16 @@
   top: 7rem;
 }
 
+.item .item_container .item_image_wrap .sold_text {
+  position: absolute;
+  top: 0;
+  background-color: #ff4747;
+  color: white;
+  font-size: 3rem;
+  padding: 20px 30px;
+  border-radius: 0 0 5px 0;
+}
+
 .item .item_container .item_image_wrap .item_image {
   width: 40vw;
   height: 40vw;

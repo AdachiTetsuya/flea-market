@@ -1,0 +1,54 @@
+{% extends "myapp/base.html" %}
+
+{% load static %}
+
+{% block extra_style %}
+<link rel="stylesheet" href="{% static 'myapp/css/purchase.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="purchase">
+    <div class="purchase_container">
+        <div class="purchase_title">
+            <span>購入内容の確認</span>
+        </div>
+        <div class="purchase_detail">
+            <div class="purchase_image_wrap">
+                <img src="{{ item.image.url }}" alt="商品の写真" class="purchase_image">
+            </div>
+            <div class="detail_board">
+                <p class="item_title">{{ item.name }}</p>
+                <p class="item_price">¥{{ item.price }}</p>
+            </div>
+        </div>
+        <div class="purchase_confirm">
+            <div class="confirm_price">
+                <span class="confirm_price_title">商品代金</span>
+                <span class="confirm_price_num">¥{{ item.price }}</span>
+            </div>
+            <div class="confirm_price">
+                <span class="confirm_price_title">お支払い金額</span>
+                <span class="confirm_price_num">¥{{ item.price }}</span>
+            </div>
+        </div>
+        <div class="purchase_form_container">
+            {% if user.is_authenticated %}
+            <form action="{% url 'myapp:purchase' item.id %}" method="POST">
+                {% csrf_token %}
+
+                <script
+                    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                    data-key="{{ publick_key }}"
+                    data-amount="{{ item.price }}"
+                    data-name="しるし書店"
+                    data-description="{{ item.name }}"
+                    data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                    data-locale="ja"
+                    data-currency="jpy">
+                </script>
+            </form>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

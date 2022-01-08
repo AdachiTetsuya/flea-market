@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.conf import settings
 from django.http import request
 from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -10,6 +11,8 @@ from django .views.generic import View
 from . models import Item,Category,Quality,Sort
 from .forms import UserForm,SellForm
 
+import stripe
+stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 User = get_user_model()
@@ -104,13 +107,55 @@ class ItemView(View):
     def get(self, request, item_id):
         item = get_object_or_404(Item, id=item_id)
 
-
         context = {
             "item": item,
             "category":item.get_category_display(),
             "quality":item.get_quality_display(),
         }
         return render(request, "myapp/item.html", context)
+
+# 商品の購入画面
+class PurchaseView(View):
+    def get(self, request, item_id):
+        item = get_object_or_404(Item, id=item_id)
+
+        context = {
+            "item": item,
+            "publick_key":settings.STRIPE_PUBLISHABLE_KEY,
+        }
+        return render(request, "myapp/purchase.html", context)
+
+    def post(self, request, item_id):
+        """購入時の処理"""
+        item = get_object_or_404(Item, id=item_id)
+        item.is_purchased = True
+        item.save()
+        user = request.user
+        token = request.POST['stripeToken']  # フォームでのサブミット後に自動で作られる
+        try:
+            # 購入処理
+            charge = stripe.Charge.create(
+                amount=item.price,
+                currency='jpy',
+                source=token,
+                description='書籍名:{}'.format(item.name),
+            )
+        except stripe.error.CardError as e:
+            # カード決済が上手く行かなかった(限度額超えとか)ので、メッセージと一緒に再度ページ表示
+            context = self.get_context_data()
+            context['message'] = 'Your payment cannot be completed. The card has been declined.'
+            item.is_purchased = False
+            item.save()
+            return render(request, 'myapp/purchase.html', context)
+        else:
+            # 上手く購入できた。
+            item.buyer = user
+            item.is_settle = True
+            item.save()
+            user.buy_num += 1
+            user.save()
+
+            return redirect('myapp:home')
 
 
 #出品画面
@@ -145,6 +190,8 @@ def sell(request):
             new_item.detail = detail
 
             new_item.save()
+            user.sell_num += 1
+            user.save()
             return redirect(to="/home")
         else:
             return render(request, "myapp/sell.html", context)
@@ -190,3 +237,5 @@ class SellerProfileView(View):
             "items":items,
         }
         return render(request, "myapp/seller_profile.html", context)
+
+    

@@ -1,0 +1,98 @@
+.purchase{
+    padding-top: 56px;
+
+    .purchase_container{
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        margin: 0 auto;
+        padding-top: 5rem;
+        gap: 1.5rem;
+
+        .purchase_title{
+            text-align: center;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 1rem;
+            span{
+                font-weight: bold;
+                font-size: 1.8rem;
+
+            }
+        }
+        .purchase_detail{
+            display: flex;
+            gap: 10%;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 1.1rem;
+
+            .purchase_image_wrap{
+
+                .purchase_image{
+                    width: 7rem;
+                    height: 7rem;
+                    object-fit:cover;
+                    border-radius: 5px;
+                }
+
+            }
+            .detail_board{
+                
+                .item_title{
+                    margin: 0;
+                    font-size: 1.5rem
+
+                }
+                .item_price{
+                    margin: 0;
+                    padding-top: 0.5rem;
+                    font-weight: bold;
+                    font-size: 1.3rem;
+
+                }
+
+            }
+        }
+
+        .purchase_confirm{
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 0 auto;
+            width: 70%;
+            border: 1px solid #eee;
+            padding: 1rem 2rem;
+            .confirm_price{
+                display: flex;
+                justify-content: space-between;
+                
+                .confirm_price_title{
+                    font-weight: bold;
+
+                }
+                .confirm_price_num{
+                    align-self: center;
+                }
+            }
+        }
+        .purchase_confirm > :first-child{
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        .purchase_confirm > :last-child > :last-child{
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .purchase_form_container{
+            padding-top: 1rem;
+            text-align: center;
+
+                
+            span{
+                font-size: 1.5rem;
+                padding: 5px 30px;
+            }
+
+        }
+    }
+}

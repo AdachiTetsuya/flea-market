@@ -11,6 +11,16 @@
             position: fixed;
             top: 7rem;
 
+            .sold_text{
+                position: absolute;
+                top: 0;
+                background-color: rgb(255, 71, 71);
+                color: white;
+                font-size: 3rem;
+                padding: 20px 30px;
+                border-radius: 0 0 5px 0;
+            }
+
             .item_image{
                 
                 width:40vw;
