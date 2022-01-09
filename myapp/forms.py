@@ -4,7 +4,7 @@ from django.forms import fields, widgets
 from django.forms.formsets import formset_factory
 
 User = get_user_model()
-from .models import Item, Quality
+from .models import Item, Quality,Talk
 
 class ItemSearchForm(forms.Form):
     q_word = forms.CharField(label='検索',required=False)
@@ -21,7 +21,16 @@ class UserForm(forms.ModelForm):
             'introduction':'自己紹介',
         }
 
+class TalkForm(forms.ModelForm):
+    """トークの送信のためのform
+    メッセージを送信するだけで、誰から誰か、時間は全て自動で対応できるのでこれだけで十分
+    """
 
+    class Meta:
+        model = Talk
+        fields = ("talk",)
+        # 入力予測の表示をさせない（めっちゃ邪魔）
+        widgets = {"talk": forms.TextInput(attrs={"autocomplete": "off"})}
 
 
 

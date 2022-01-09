@@ -33,7 +33,7 @@ ul {
   height: 56px;
   border-bottom: solid 1px #eee;
   background-color: #fff;
-  z-index: 1;
+  z-index: 2;
 }
 
 .header .header-container {
@@ -175,6 +175,7 @@ ul {
   position: absolute;
   top: 54px;
   right: 20px;
+  z-index: 5;
 }
 
 .account_content li {

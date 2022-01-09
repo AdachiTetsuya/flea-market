@@ -96,6 +96,12 @@ class Talk(models.Model):
     # 時間は
     time = models.DateTimeField(auto_now_add=True)
 
+    talk_item = models.ForeignKey(
+        Item, on_delete=models.CASCADE, related_name="talk_item"
+    )
+
+
+
     class Meta:
         verbose_name_plural = 'Talk'
 

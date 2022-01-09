@@ -150,6 +150,30 @@
                         align-self: center;
                     }
                 }
+
+                .message_link{
+                    text-align: center;
+                    display: block;
+
+                    .message_link_title{
+                        position: relative;
+                        border: 1px solid #eee;
+                        border-radius: 5px;
+                        font-size: 1.2rem;
+                        padding: 0.5rem;
+
+                        i{
+                            position: absolute;
+                            left: 1rem;
+
+                            font-size: 1.5rem;
+                        }
+                    }
+                }
+                .message_link:hover{
+                    background-color: #eee;
+                }
+
                 
                 .seller_info_board:hover{
                     background-color: #eee;

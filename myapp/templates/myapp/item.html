@@ -69,6 +69,12 @@
                         <span class="next_icon">></span>
                     </span>
                 </a>
+                {% if user != item.seller %}
+                <a href="{% url 'myapp:talk_room' item.seller.id item.id %}" class="message_link">
+                    
+                    <p class="message_link_title"><i class="bi bi-chat"></i><span>メッセージ</span></p>
+                </a>
+                {% endif %}
             </div>
         </div>
     </div>

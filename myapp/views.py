@@ -1,16 +1,15 @@
 from django.contrib.auth import get_user_model
 from django.conf import settings
-from django.http import request
 from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+from django.db.models import OuterRef, Q, Subquery
 from django.views import generic
 from django .views.generic import View
 from django.views.generic.base import TemplateView
 
-from . models import Item,Category,Quality,Sort
-from .forms import UserForm,SellForm
+from . models import Item,Category,Quality,Sort,Talk
+from .forms import UserForm,SellForm,TalkForm
 
 import stripe
 stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -75,10 +74,6 @@ def search(request):
         if 'quality' in request.GET:
             qualities = request.GET.getlist('quality')
             items = items.filter(quality__in=qualities)
-
-        if request.user.is_authenticated:
-            user = request.user
-            items.exclude(seller=user)
 
         context = {
             "Category":Category,
@@ -151,8 +146,9 @@ class PurchaseView(View):
             item.save()
             user.buy_num += 1
             user.save()
+            user_id = item.seller.id
 
-            return redirect('myapp:home')
+            return redirect("myapp:talk_room", user_id,item_id)
 
 
 #出品画面
@@ -239,17 +235,6 @@ class SellerProfileView(View):
 class MyPageView(generic.TemplateView):
     template_name = "myapp/mypage.html"
 
-# class ListingsView(generic.TemplateView):
-#     template_name = "myapp/mypage_listings.html"
-
-#     def get_context_data(self, **kwargs):
-#         user = self.request.user
-#         items = Item.objects.filter(seller=user)
-#         ctx = super().get_context_data(**kwargs)
-#         if self.kwargs == 'listing':
-#             ctx['items'] = items.filter(is_purchased = False)
-#         return ctx
-
 class ListingsView(View):
     def get(self, request, status):
         if status == 'listing':
@@ -274,3 +259,54 @@ class PurchasesView(View):
             "items": items,
         }
         return render(request, "myapp/mypage_purchases.html",context)
+
+
+# トーク画面
+@login_required
+def talk_room(request,user_id,item_id):
+    user = request.user
+    friend = get_object_or_404(User, id=user_id)
+    item = get_object_or_404(Item, id=item_id)
+    talk = Talk.objects.filter(
+        Q(talk_from=user, talk_to=friend) | Q(talk_to=user, talk_from=friend)
+    ).filter(talk_item = item).order_by("time")
+    form = TalkForm()
+    if item.is_settle == True:
+        buyer = item.buyer
+    else:
+        buyer = None
+        
+    context = {
+        "form": form,
+        "talks": talk,
+        "item":item,
+        "friend":friend,
+        "user":user,
+        "buyer":buyer,
+    }
+    if "status" in request.GET:
+        status = request.GET['status']
+        if status == 'given':
+            item.is_given = True
+            item.save()
+        elif status == 'got':
+            item.is_got = True
+            item.save()
+
+    # POST（メッセージ送信あり）
+    if request.method == "POST":
+        # 送信内容を取得
+        new_talk = Talk(talk_from=user, talk_to=friend, talk_item=item)
+        form = TalkForm(request.POST, instance=new_talk)
+
+        # 送信内容があった場合
+        if form.is_valid():
+            # 保存
+            form.save()
+            # 更新
+            return redirect("myapp:talk_room", user_id,item_id)
+
+    # POSTでない（リダイレクトorただの更新）&POSTでも入力がない場合
+    return render(request, "myapp/talk_room.html", context)
+
+

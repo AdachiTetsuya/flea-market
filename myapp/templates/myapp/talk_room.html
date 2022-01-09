@@ -1,0 +1,68 @@
+{% extends "myapp/base.html" %}
+{% load static %}
+
+{% block extra_style %}
+<link rel="stylesheet" href="{% static 'myapp/css/talk_room.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="talk_room">
+    <div class="talk_room_container">
+        <div class="talk_header">
+            <a href="{% url 'myapp:seller_profile' item.seller.id %}" class="friend_link">
+                <img class="header-friend_icon" src="{{ friend.icon.url }}" alt="出品者のアイコン画像">
+                <p class="header-friend_name">{{ friend.username }}</p>
+            </a>
+            <a href="{% url 'myapp:item' item.id %}" class="item_link" title="商品の詳細">
+                <img class="item-image" src="{{ item.image.url }}" alt="商品の写真">
+            </a>
+        </div>
+        <div class="talk_content">
+            <ul class="chatboard" id="chatboard">
+                {% for talk in talks %}
+                {% if talk.talk_from == user %}
+                <li class="chatboard__content_user">
+                    <p class="chatboard__time">{{ talk.time|date:"m/d" }}<br>{{ talk.time|date:"H:i" }}</p>
+                    <div class="text_container_user">
+                        <p class="chatboard__text">{{ talk.talk }}</p>
+                    </div>
+
+                </li>
+                {% else %}
+                <li class="chatboard__content_friend">
+                    <img class="friend_icon" src="{{ friend.icon.url }}" alt="出品者のアイコン画像">
+                    <div class="text_container_friend">
+                        <p class="chatboard__text">{{ talk.talk }}</p>
+                    </div>
+                    <p class="chatboard__time">{{ talk.time|date:"m/d" }}<br>{{ talk.time|date:"H:i" }}</p>
+                </li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+        <!-- トークの送信部分 -->
+        <form class="talk_room__sendbox" method="POST">
+            {% if item.is_settle == True and item.buyer == buyer %}
+                {% if item.seller == user and item.is_given == False %}
+                <a href="{% url 'myapp:talk_room' friend.id item.id %}?status=given" class="talk_room__sendbox-btn">渡した</a>
+                {% elif item.buyer == user and item.is_given == True and item.is_got == False %}
+                <a href="{% url 'myapp:talk_room' friend.id item.id %}?status=got" class="talk_room__sendbox-btn">受け取った</a>
+                {% endif %}
+            {% endif %}
+            {% csrf_token %}
+            {{ form.talk }}
+            <button class="talk_room__sendbox-btn" type="submit">送信</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+    // トークの表示を新しいものを下にしているため、最下にスクロールさせる
+    document.addEventListener("DOMContentLoaded", function () {
+        const chatboard = document.getElementById("chatboard");
+        window.scroll(0, chatboard.scrollHeight);
+    });
+</script>
+{% endblock %}

@@ -22,5 +22,6 @@ urlpatterns = [
 
     path("mypage/listings/<str:status>",views.ListingsView.as_view(), name="mypage/listings"),
     path("mypage/purchases/<str:status>",views.PurchasesView.as_view(), name="mypage/purchases"),
+    path("talk_room/<int:user_id>/<int:item_id>/",views.talk_room,name="talk_room"),
 
 ]
