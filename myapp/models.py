@@ -112,12 +112,28 @@ class Talk(models.Model):
 class Nortify(models.Model):
     #誰に
     notice_to = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="notice_to")
+    # トーク画面に行くために
+    friend = models.ForeignKey(CustomUser, on_delete=models.CASCADE,related_name="talk_with",blank=True,null=True)
+    #どの商品に対して
+    nortify_item = models.ForeignKey(Item, on_delete=models.CASCADE,related_name="nortify_item")
     # 時間は
     time = models.DateTimeField(auto_now_add=True)
     #内容
-    nortify = models.CharField(max_length=100)
+    nortify = models.CharField(max_length=100,blank=True,null=True)
     #チェックされたかどうか
     is_checked = models.BooleanField(default=False)
+
+    def set_purchased(self,item,user):
+        self.nortify = item.name + "が" + user.username + "さんに購入されました。渡したら、トーク画面の「渡したボタン」を押してください。"
+
+    def set_message(self,user):
+        self.nortify = user.username + "さんからメッセージが届きました"
+
+    def set_given(self,user):
+        self.nortify = user.username + "さんが商品を渡したようです。受け取ったら、トーク画面の「受け取ったボタン」を押してください。"
+
+    def set_end(self,user):
+        self.nortify = user.username + "さんとの取引が終了しました。お疲れ様でした。"
 
     class Meta:
         verbose_name_plural = 'Nortify'

@@ -1,0 +1,54 @@
+@charset "UTF-8";
+/* headerを避ける */
+.nortify {
+  padding-top: 56px;
+  text-align: center;
+  width: 100vw;
+}
+
+.nortify .nortify_title {
+  margin: 1rem 0;
+  padding-top: 0.5rem;
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+.nortify .nortify_container {
+  margin: 0 auto;
+  width: 40%;
+}
+
+.nortify .nortify_container ul {
+  text-align: left;
+}
+
+.nortify .nortify_container ul li {
+  border-bottom: 1px solid #bdbdbd;
+}
+
+.nortify .nortify_container ul li a {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.nortify .nortify_container ul li a p {
+  margin: 0;
+  padding: 0.7rem 0;
+}
+
+.nortify .nortify_container ul li a:hover {
+  background-color: #eee;
+}
+
+.nortify .nortify_container ul li.checked {
+  background-color: #eee;
+  opacity: 0.5;
+}
+
+.nortify .nortify_container ul li:first-child {
+  border-top: 1px solid #bdbdbd;
+}

@@ -8,8 +8,9 @@ from django.views import generic
 from django .views.generic import View
 from django.views.generic.base import TemplateView
 
-from . models import Item,Category,Quality,Sort,Talk
-from .forms import UserForm,SellForm,TalkForm
+from . models import Item,Category, Nortify,Quality,Sort,Talk
+from . forms import UserForm,SellForm,TalkForm
+from . utils import is_notify
 
 import stripe
 stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -28,15 +29,16 @@ class SignupListView(generic.TemplateView):
 #ホーム画面
 def home(request):
     items = Item.objects.filter(is_purchased=False).order_by("-sell_time")
+    nortify = False
     if request.user.is_authenticated:
         user = request.user
-        items = (
-            items.exclude(seller=user)
-        )
-
+        items = items.exclude(seller=user)
+        nortify = is_notify(user)
+        
     if request.method == 'GET':
         context = {
             "items": items,
+            "nortify":nortify,
         }
         return render(request, "myapp/home.html", context)
 
@@ -75,6 +77,7 @@ def search(request):
             qualities = request.GET.getlist('quality')
             items = items.filter(quality__in=qualities)
 
+        
         context = {
             "Category":Category,
             "Quality":Quality,
@@ -147,6 +150,10 @@ class PurchaseView(View):
             user.buy_num += 1
             user.save()
             user_id = item.seller.id
+            #nortifyを作る
+            notice = Nortify(notice_to=item.seller,friend=user,nortify_item=item)
+            notice.set_purchased(item,user)
+            notice.save()
 
             return redirect("myapp:talk_room", user_id,item_id)
 
@@ -183,6 +190,7 @@ def sell(request):
             new_item.detail = detail
 
             new_item.save()
+
             user.sell_num += 1
             user.save()
             return redirect(to="/home")
@@ -289,9 +297,24 @@ def talk_room(request,user_id,item_id):
         if status == 'given':
             item.is_given = True
             item.save()
+            #nortifyを作る
+            notice = Nortify(notice_to=friend,friend=user,nortify_item=item)
+            notice.set_given(user)
+            notice.save()
+
         elif status == 'got':
             item.is_got = True
             item.save()
+            #nortifyを作る
+            notice = Nortify(notice_to=friend,friend=user,nortify_item=item)
+            notice.set_end(user)
+            notice.save()
+
+    if "nortify" in request.GET:
+        nortify_id = request.GET['nortify']
+        nortify = get_object_or_404(Nortify, id=nortify_id)
+        nortify.is_checked = True
+        nortify.save()
 
     # POST（メッセージ送信あり）
     if request.method == "POST":
@@ -303,6 +326,10 @@ def talk_room(request,user_id,item_id):
         if form.is_valid():
             # 保存
             form.save()
+            #nortifyを作る
+            notice = Nortify(notice_to=friend,friend=user,nortify_item=item)
+            notice.set_message(user)
+            notice.save()
             # 更新
             return redirect("myapp:talk_room", user_id,item_id)
 
@@ -310,3 +337,14 @@ def talk_room(request,user_id,item_id):
     return render(request, "myapp/talk_room.html", context)
 
 
+
+# お知らせ画面
+class NortifyView(TemplateView,LoginRequiredMixin):
+    template_name = "myapp/nortify.html"
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx['nortifys'] = Nortify.objects.filter(notice_to=self.request.user).order_by("-time")
+        ctx['nortify'] = is_notify(self.request.user)
+        return ctx
+        

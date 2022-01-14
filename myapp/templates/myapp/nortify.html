@@ -1,0 +1,28 @@
+{% extends "myapp/base.html" %}
+
+{% load static %}
+
+{% block extra_style %}
+<link rel="stylesheet" href="{% static 'myapp/css/nortify.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="nortify">
+    <div class="nortify_title">お知らせ</div>
+    <div class="nortify_container">
+        <ul>
+            {% for nortify in nortifys %}
+            <li class="{% if nortify.is_checked %}checked{% endif %}">
+                <a href="{% url 'myapp:talk_room' nortify.friend.id nortify.nortify_item.id %}?nortify={{ nortify.id }}" class="nortify-link">
+                    <p>{{ nortify.nortify }}</p>
+                    <p>{{ nortify.time|date:"m/d" }} {{ nortify.time|date:"H:i" }}</p>
+                    <p>></p>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}
+
+

@@ -36,8 +36,12 @@
                     <ul>
                         <li>
                         {% if user.is_authenticated %}
-                            <a href="#">
+                            <a href="{% url 'myapp:nortify' %}">
+                                {% if nortify %}
+                                <img src="{% static 'myapp/img/bell-fill-nortify.svg' %}" width="27.2px" height="32px">
+                                {% else %}
                                 <i class="bi bi-bell-fill"></i>
+                                {% endif %}
                                 <p>お知らせ</p>
                             </a>
                         </li>
