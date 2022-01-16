@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.line',
-    'allauth.socialaccount.providers.twitter',
 
     'stripe',
 

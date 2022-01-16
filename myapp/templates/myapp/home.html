@@ -10,7 +10,7 @@
 <div class="home">
     <div class="home_title">商品一覧</div>
     <ul class="item-container">
-        {% for item in items %}
+        {% for item in object_list %}
         <li class="item-list__item">
             <a class="item-list__link" href="{% url 'myapp:item' item.id %}">
                 {% if item.is_purchased %}

@@ -3,9 +3,9 @@ from django.conf import settings
 from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
-from django.db.models import OuterRef, Q, Subquery
+from django.db.models import Q
 from django.views import generic
-from django .views.generic import View
+from django .views.generic import View,ListView
 from django.views.generic.base import TemplateView
 
 from . models import Item,Category, Nortify,Quality,Sort,Talk
@@ -26,93 +26,105 @@ class LoginListView(generic.TemplateView):
 class SignupListView(generic.TemplateView):
     template_name = "myapp/signup_list.html"
 
-#ホーム画面
-def home(request):
-    items = Item.objects.filter(is_purchased=False).order_by("-sell_time")
-    nortify = False
-    if request.user.is_authenticated:
-        user = request.user
-        items = items.exclude(seller=user)
-        nortify = is_notify(user)
-        
-    if request.method == 'GET':
-        context = {
-            "items": items,
-            "nortify":nortify,
-        }
-        return render(request, "myapp/home.html", context)
+# ホーム画面
+class HomeView(ListView):
+    template_name = 'myapp/home.html'
+    model = Item
+    def get_queryset(self, **kwargs):
+        queryset = super().get_queryset(**kwargs).filter(is_purchased=False).order_by('-sell_time')
 
+        if self.request.user.is_authenticated:
+            user = self.request.user
+            queryset = queryset.exclude(seller=user)
 
-#検索画面
-def search(request):
-        
-    if request.method == 'GET':
-        if 'sort' in request.GET:
-            sort =  request.GET['sort']
+        return queryset
+    
+    def get_context_data(self):
+        ctx = super().get_context_data()
+        nortify = False
+        if self.request.user.is_authenticated:
+            nortify = is_notify(self.request.user)
+
+        ctx['nortify'] = nortify
+            
+        return ctx
+
+# 検索画面
+class SearchView(ListView):
+    template_name = 'myapp/search.html'
+    model = Item
+    context_object_name = 'items' # オブジェクト名を items に指定
+    def get_queryset(self, **kwargs):
+        queryset = super().get_queryset(**kwargs).order_by("-sell_time")
+        if 'sort' in self.request.GET:
+            sort =  self.request.GET['sort']
             if sort == 'a_created_time':
-                items = Item.objects.order_by("-sell_time")
+                queryset = queryset.order_by("-sell_time")
             elif sort == 'd_created_time':
-                items = Item.objects.order_by("sell_time")
+                queryset = queryset.order_by("sell_time")
             elif sort == 'a_price':
-                items = Item.objects.order_by("price")
+                queryset = queryset.order_by("price")
             elif sort == 'd_price':
-                items = Item.objects.order_by("-price")
-        else:
-            items = Item.objects.order_by("-sell_time")
+                queryset = queryset.order_by("-price")
 
-        if 'keyword' in request.GET:
-            keyword = request.GET['keyword']
-            items = (
-                items.filter(name__contains=keyword)
-            )
-
-        if 'category' in request.GET:
-            categories = request.GET.getlist('category')
-            items = items.filter(category__in=categories)
-
-        if 'status' in request.GET:
-            items = items.filter(is_purchased = False)
-
-        if 'quality' in request.GET:
-            qualities = request.GET.getlist('quality')
-            items = items.filter(quality__in=qualities)
-
+        if 'keyword' in self.request.GET:
+            keyword = self.request.GET['keyword']
+            queryset = queryset.filter(name__contains=keyword)
         
-        context = {
+        if 'category' in self.request.GET:
+            categories = self.request.GET.getlist('category')
+            queryset = queryset.filter(category__in=categories)
+
+        if 'status' in self.request.GET:
+            queryset = queryset.filter(is_purchased = False)
+
+        if 'quality' in self.request.GET:
+            qualities = self.request.GET.getlist('quality')
+            queryset = queryset.filter(quality__in=qualities)
+
+        return queryset
+    
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx.update({
             "Category":Category,
             "Quality":Quality,
             "Sort":Sort,
-            "items": items,
-        }
-        return render(request, "myapp/search.html", context)
+        })
+
+        return ctx
 
 
 # カテゴリー一覧画面
-def category(request):
-    if request.method == 'GET':
-    
-        context = {
-            "Category": Category,
-        }
-        return render(request, "myapp/category.html", context)
+class CategoryView(TemplateView):
+    template_name = 'myapp/category.html'
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx['Category'] = Category
+
+        return ctx
 
 
 #商品詳細の画面
-class ItemView(View):
-    def get(self, request, item_id):
-        item = get_object_or_404(Item, id=item_id)
-
-        context = {
+class ItemView(TemplateView):
+    template_name = 'myapp/item.html'
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        item = get_object_or_404(Item, id=kwargs.get('item_id'))
+        ctx.update({
             "item": item,
             "category":item.get_category_display(),
             "quality":item.get_quality_display(),
-        }
-        return render(request, "myapp/item.html", context)
+        })
+
+        return ctx
+
 
 # 商品の購入画面
 class PurchaseView(View):
-    def get(self, request, item_id):
-        item = get_object_or_404(Item, id=item_id)
+    def get(self, request, **kwargs):
+        item = get_object_or_404(Item, id=kwargs.get('item_id'))
 
         context = {
             "item": item,
@@ -344,7 +356,11 @@ class NortifyView(TemplateView,LoginRequiredMixin):
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
-        ctx['nortifys'] = Nortify.objects.filter(notice_to=self.request.user).order_by("-time")
-        ctx['nortify'] = is_notify(self.request.user)
+        ctx.update({
+            'nortifys':Nortify.objects.filter(notice_to=self.request.user).order_by("-time"),
+            'nortify':is_notify(self.request.user)
+        })
         return ctx
+
+        
         
